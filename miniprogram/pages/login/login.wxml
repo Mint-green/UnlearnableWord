@@ -1,0 +1,34 @@
+<!--login.wxml-->
+<view class="bgWrapper" style='{{bgStyle}}'></view>
+
+<view class="wrapper" wx:if="{{!isregister}}">
+  <view class="title">登录</view>
+  <input type="text" class="inputField username" placeholder="账号" data-inputtype="username" bindinput="handleInput" confirm-type='next' />
+  <input type="text" class="inputField pwd" password="true" placeholder="密码" data-inputtype="pwd" bindinput="handleInput" confirm-type='done' />
+  <view class="btnWrapper registerBtnWrapper">
+    <view class="changeBtn registerBtn" bindtap='changeType'>注册</view>
+  </view>
+  <view class="errmsg">{{errmsg[errtype]}}</view>
+  <button class="submit" type="primary" bindtap="login" hover-class="wasTaped">确定</button>
+</view>
+
+<view class="wrapper" wx:if="{{isregister}}">
+  <view class="title">注册</view>
+  <input type="text" class="inputField username" placeholder="账号" data-inputtype="username" bindinput="handleInput" confirm-type='next' bindblur='checkUsername'/>
+  <input type="text" class="inputField middlePwd" password="true" placeholder="密码" data-inputtype="pwd" bindinput="handleInput" confirm-type='next' />
+  <input type="text" class="inputField pwd" password="true" placeholder="确认密码" data-inputtype="confirm_pwd" bindinput="handleInput" confirm-type='done' bindblur='checkTwoPwd' />
+  <view class="btnWrapper">
+    <view class="changeBtn loginBtn" bindtap='changeType'>登录</view>
+  </view>
+  <view class="errmsg">{{errmsg[errtype]}}</view>
+  <button class="submit" type="primary" bindtap="register" hover-class="wasTaped">确定</button>
+</view>
+
+<!-- <view class="avatarPicTest"><image class="pic" src="cloud://music-cloud-1v7x1.6d75-music-cloud-1v7x1-1302160851/avatar_pic/default_3.jpg" mode='aspectFit'></image></view> -->
+
+<view class="wxLoginWrapper">
+  <view class="loginBtn" hover-class="wasTaped" bindtap='wxLogin'>
+    <image class="logo" src='../../static/images/logo.png' mode='aspectFit'></image>
+  </view>
+  <view class="wxLoginTip">微信登录无需注册哦~</view>
+</view>

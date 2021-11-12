@@ -1,0 +1,205 @@
+.searchWrapper {
+    width: 100%;
+    height: 100rpx;
+    position: fixed;
+    z-index: 8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f6f6f6;
+
+    .searchIcon {
+        position: absolute;
+        top: 30rpx;
+        left: 40rpx;
+        font-size: 40rpx;
+        font-weight: 500;
+        color: #808080;
+        z-index: 10;
+    }
+
+    .search {
+        width: 85%;
+        height: 70rpx;
+        font-size: 32rpx;
+        line-height: 60rpx;
+        padding-left: 70rpx;
+        // border: 4rpx solid #e2e2e2;
+        border: 2rpx solid #e2e2e2;
+        border-radius: 15rpx;
+        background-color: white;
+        color: #333333;
+        font-family: Arial;
+    }
+
+    .placeHolder{
+        font-size: 32rpx;
+        line-height: 60rpx;
+        // padding-left: 70rpx;
+        // color: #333333;
+        // font-family: 'Microsoft YaHei', Arial;
+    }
+}
+
+.cancelWrapper {
+    position: fixed;
+    top: 0rpx;
+    right: 8rpx;
+    width: 100rpx;
+    height: 100rpx;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .cancel {
+        width: 36rpx;
+        height: 36rpx;
+        // text-align: center;
+        // font-size: 36rpx;
+        // line-height: 36rpx;
+        // color: #757575;
+        background-color: #d6d6d6;
+        border-radius: 18rpx;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .cancelIcon {
+            font-size: 24rpx;
+            color: white;
+        }
+    }
+}
+
+.resultWrapper {
+    margin-top: 100rpx;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10rpx;
+    margin-bottom: 130rpx;
+
+    .result {
+        width: 670rpx; // 750-40*2
+        height: 80rpx;
+        line-height: 80rpx;
+        font-size: 32rpx;
+        padding-left: 40rpx;
+        padding-right: 40rpx;
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+
+        .word {
+            color: #333333;
+        }
+
+        .desc {
+            color: #333333;
+        }
+
+        .trans {
+            color: #757575;
+            font-size: 28rpx;
+        }
+    }
+
+    .wasTaped {
+        background-color: #e6e6e6;
+    }
+}
+
+.historyWrapper {
+    margin-top: 100rpx;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 140rpx;
+
+    .history {
+        width: 670rpx; // 750-40*2
+        height: 80rpx;
+        line-height: 80rpx;
+        font-size: 32rpx;
+        padding-left: 40rpx;
+        padding-right: 40rpx;
+        position: relative;
+
+        .wordInfo {
+            width: 630rpx;
+            display: -webkit-box;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+
+            .word {
+                color: #333333;
+            }
+
+            .trans {
+                color: #757575;
+                font-size: 28rpx;
+            }
+
+        }
+
+        .delete {
+            position: absolute;
+            top: 0rpx;
+            right: 40rpx;
+            width: 30rpx;
+            height: 80rpx;
+            z-index: 5;
+            // border-radius: 18rpx;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .deleteIcon {
+                font-size: 30rpx;
+                color: #515151;
+            }
+        }
+    }
+
+    .clearAll {
+        margin-top: 20rpx;
+        margin-left: auto;
+        margin-right: auto;
+        width: 200rpx;
+        font-size: 28rpx;
+        color: #808080;
+    }
+
+    .wasTaped {
+        background-color: #e6e6e6;
+    }
+}
+
+.changeBigDB {
+    position: fixed;
+    width: 100%;
+    height: 80rpx;
+    padding-bottom: 40rpx;
+    bottom: 0rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f6f6f6;
+    z-index: 10;
+
+    .text {
+        font-size: 24rpx;
+        line-height: 30rpx;
+        color: #a0a0a0;
+
+        .changeBtn {
+            color: #515151;
+        }
+    }
+}

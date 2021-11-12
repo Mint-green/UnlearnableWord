@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/user/user",
+    "pages/overview/overview",
+    "pages/login/login",
+    "pages/search/search",
+    "pages/word_detail/word_detail",
+    "pages/uploadFile/index"
+  ],
+  "window": {
+    "backgroundColor": "#FFFFFF",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#86e3ce",
+    "navigationBarTitleText": "学不会单词",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#F0F0F0",
+    "backgroundColor": "#ffffff",
+    "selectedColor": "#6DAFFE",
+    "borderStyle": "white",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "  ",
+        "iconPath": "static/images/tab-learn-CDCDCD.png",
+        "selectedIconPath": "static/images/tab-learn-A6D6FA.png"
+      },
+      {
+        "pagePath": "pages/overview/overview",
+        "text": "  ",
+        "iconPath": "static/images/tab-overview-CDCDCD.png",
+        "selectedIconPath": "static/images/tab-overview-A6D6FA.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "  ",
+        "iconPath": "static/images/tab-user-CDCDCD.png",
+        "selectedIconPath": "static/images/tab-user-A6D6FA.png"
+      }
+      
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents"
+}

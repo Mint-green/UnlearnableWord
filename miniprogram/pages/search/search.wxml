@@ -1,0 +1,50 @@
+<!--pages/search/search.wxml-->
+
+<view class="searchWrapper">
+    <view class="searchIcon iconfont icon-search"></view>
+    <input type="text" class="search" value="{{searchWords}}" always-embed="{{true}}" placeholder="请输入想查询的单词"
+    placeholder-class="placeHolder" focus="{{focus}}" bindinput="handleInput" />
+</view>
+<view class="cancelWrapper" wx:if="{{keyword!=''}}" catchtap="clearInput">
+    <view class="cancel">
+        <view class="cancelIcon iconfont icon-delete"></view>
+    </view>
+</view>
+
+<view class="resultWrapper" wx:if="{{haveResult}}">
+    <view class="result" wx:for="{{lemmaResult}}" wx:key="index" bindtap="getWordDetail" data-sourceType="0"
+        data-index="{{index}}" hover-class="wasTaped">
+        <text class="word">{{item.word}}</text>
+        <text class="desc" space="nbsp"> 的{{item.exchange}}</text>
+        <text class="trans" space="nbsp" decode="true">&nbsp;&nbsp;&nbsp;&nbsp;{{item.translation}}</text>
+    </view>
+    <view class="result" wx:for="{{directResult}}" wx:key="index" bindtap="getWordDetail" data-sourceType="1"
+        data-index="{{index}}" hover-class="wasTaped">
+        <text class="word">{{item.word}}</text>
+        <text class="trans" space="nbsp" decode="true">&nbsp;&nbsp;&nbsp;&nbsp;{{item.translation}}</text>
+    </view>
+</view>
+
+<scroll-view class="historyWrapper" wx:if="{{history.length != 0 && !haveResult}}">
+    <view class="history" wx:for="{{history}}" wx:key="index" bindtap="getWordDetail" data-sourceType="2"
+        data-index="{{index}}" hover-class="wasTaped">
+        <view class="wordInfo">
+            <text class="word">{{item.word}}</text>
+            <text class="trans" space="nbsp" decode="true">&nbsp;&nbsp;&nbsp;&nbsp;{{item.translation}}</text>
+        </view>
+        <!-- <view class="delete iconfont icon-delete"></view> -->
+        <view class="delete" data-index="{{index}}" catchtap="deleteHistory">
+            <view class="deleteIcon iconfont icon-delete"></view>
+        </view>
+    </view>
+    <view class="clearAll" data-index="-1" bindtap="deleteHistory">
+        <text class="bin iconfont icon-bin"></text>清除全部历史
+    </view>
+</scroll-view>
+
+<view class="changeBigDB">
+    <view class="text" wx:if="{{!DBtype}}">当前在使用小词库，速度较快，能满足大部分需求</view>
+    <view class="text" wx:if="{{!DBtype}}">可切换<text class="changeBtn" bindtap="changeType">大词库</text>获得更多的搜索结果</view>
+    <view class="text" wx:if="{{DBtype}}">当前在使用大词库，包含本应用所有词汇，速度较慢</view>
+    <view class="text" wx:if="{{DBtype}}">可切换<text class="changeBtn" bindtap="changeType">小词库</text>获得更快的搜索速度</view>
+</view>

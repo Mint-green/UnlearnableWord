@@ -1,0 +1,12 @@
+.bgWrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -100;
+}
+.bgWrapper .bg {
+  margin-left: -15%;
+  margin-top: -15%;
+  width: 130%;
+  height: 130%;
+}

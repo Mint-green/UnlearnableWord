@@ -1,0 +1,40 @@
+<!--pages/word_detail/word_detail.wxml-->
+<!-- style="background-image: linear-gradient(to bottom, {{bgStyle}}, #ffffff);" -->
+<view class="bgWrapper bg-linear-{{colorType}}"></view>
+
+<view class="voicePlaying" bindtap="playVoice">
+    <view class="word word-color-{{colorType}}">{{wordDetail.word}}</view>
+    <view class="pron" wx:if="{{wordDetail.phonetic.length>0}}">/ {{wordDetail.phonetic}} / <text
+            class="voice iconfont icon-sound"></text></view>
+    <view class="tagContainer" wx:if="{{wordDetail.tag.length>0}}">
+        <view class="tag" wx:for="{{wordDetail.tag}}" wx:key="index">{{item}}</view>
+    </view>
+</view>
+
+<view class="contentCard" wx:if="{{wordDetail.definition[0].length>0}}">
+    <view class="title content-title-color-{{colorType}}">英文释义</view>
+    <view class="contentWrapper def">
+        <view class="content defRow" wx:for="{{wordDetail.definition}}" wx:key="index">{{item}}</view>
+    </view>
+</view>
+
+<view class="contentCard" wx:if="{{wordDetail.translation.length>0}}">
+    <view class="title content-title-color-{{colorType}}">中文释义</view>
+    <view class="contentWrapper trans">
+        <view class="content transRow" wx:for="{{wordDetail.translation}}" wx:key="index">{{item.pos}} {{item.meaning}}
+        </view>
+    </view>
+</view>
+
+<view class="contentCard" wx:if="{{wordDetail.exchange.length>0}}">
+    <view class="title content-title-color-{{colorType}}">词形变换</view>
+    <view class="contentWrapper exchange">
+        <view class="content exchangeRow" wx:for="{{wordDetail.exchange}}" wx:key="index">
+            <!-- <view class="exchangeItem" wx:if="{{!item.lemma}}">{{item.name}}<text
+                    decode="true">&nbsp;&nbsp;&nbsp;&nbsp;</text>{{item.word}}</view> -->
+            <view class="exchangeName" wx:if="{{!item.lemma}}">{{item.name}}</view>
+            <view class="exchangeWord" wx:if="{{!item.lemma}}">{{item.word}}</view>
+            <view class="exchangeItem" wx:if="{{item.lemma}}">{{item.word}} 的{{item.name}}</view>
+        </view>
+    </view>
+</view>

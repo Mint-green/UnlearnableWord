@@ -1,0 +1,171 @@
+.searchWrapper {
+  width: 100%;
+  height: 100rpx;
+  position: fixed;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f6f6f6;
+}
+.searchWrapper .searchIcon {
+  position: absolute;
+  top: 30rpx;
+  left: 40rpx;
+  font-size: 40rpx;
+  font-weight: 500;
+  color: #808080;
+  z-index: 10;
+}
+.searchWrapper .search {
+  width: 85%;
+  height: 70rpx;
+  font-size: 32rpx;
+  line-height: 60rpx;
+  padding-left: 70rpx;
+  border: 2rpx solid #e2e2e2;
+  border-radius: 15rpx;
+  background-color: white;
+  color: #333333;
+  font-family: Arial;
+}
+.searchWrapper .placeHolder {
+  font-size: 32rpx;
+  line-height: 60rpx;
+}
+.cancelWrapper {
+  position: fixed;
+  top: 0rpx;
+  right: 8rpx;
+  width: 100rpx;
+  height: 100rpx;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cancelWrapper .cancel {
+  width: 36rpx;
+  height: 36rpx;
+  background-color: #d6d6d6;
+  border-radius: 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cancelWrapper .cancel .cancelIcon {
+  font-size: 24rpx;
+  color: white;
+}
+.resultWrapper {
+  margin-top: 100rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10rpx;
+  margin-bottom: 130rpx;
+}
+.resultWrapper .result {
+  width: 670rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 32rpx;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+.resultWrapper .result .word {
+  color: #333333;
+}
+.resultWrapper .result .desc {
+  color: #333333;
+}
+.resultWrapper .result .trans {
+  color: #757575;
+  font-size: 28rpx;
+}
+.resultWrapper .wasTaped {
+  background-color: #e6e6e6;
+}
+.historyWrapper {
+  margin-top: 100rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 140rpx;
+}
+.historyWrapper .history {
+  width: 670rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 32rpx;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+  position: relative;
+}
+.historyWrapper .history .wordInfo {
+  width: 630rpx;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+.historyWrapper .history .wordInfo .word {
+  color: #333333;
+}
+.historyWrapper .history .wordInfo .trans {
+  color: #757575;
+  font-size: 28rpx;
+}
+.historyWrapper .history .delete {
+  position: absolute;
+  top: 0rpx;
+  right: 40rpx;
+  width: 30rpx;
+  height: 80rpx;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.historyWrapper .history .delete .deleteIcon {
+  font-size: 30rpx;
+  color: #515151;
+}
+.historyWrapper .clearAll {
+  margin-top: 20rpx;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200rpx;
+  font-size: 28rpx;
+  color: #808080;
+}
+.historyWrapper .wasTaped {
+  background-color: #e6e6e6;
+}
+.changeBigDB {
+  position: fixed;
+  width: 100%;
+  height: 80rpx;
+  padding-bottom: 40rpx;
+  bottom: 0rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f6f6f6;
+  z-index: 10;
+}
+.changeBigDB .text {
+  font-size: 24rpx;
+  line-height: 30rpx;
+  color: #a0a0a0;
+}
+.changeBigDB .text .changeBtn {
+  color: #515151;
+}

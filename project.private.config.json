@@ -1,0 +1,36 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+            "name": "pages/search/search",
+            "pathName": "pages/search/search",
+            "query": "",
+            "scene": null
+        },
+        {
+            "name": "pages/word_detail/word_detail",
+            "pathName": "pages/word_detail/word_detail",
+            "query": "word_id=1630",
+            "scene": null
+        },
+        {
+            "name": "pages/login/login",
+            "pathName": "pages/login/login",
+            "query": "",
+            "scene": null
+        }
+    ]
+    }
+  }
+}

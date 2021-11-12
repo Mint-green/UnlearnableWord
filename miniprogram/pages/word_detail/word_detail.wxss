@@ -1,0 +1,88 @@
+.bgWrapper {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: -100;
+}
+.bgWrapper .bg {
+  margin-left: -15%;
+  margin-top: -15%;
+  width: 130%;
+  height: 130%;
+}
+.word {
+  margin-top: 70rpx;
+  margin-left: 40rpx;
+  height: 60rpx;
+  font-size: 54rpx;
+  font-weight: 700;
+  line-height: 70rpx;
+}
+.pron {
+  margin-top: 20rpx;
+  margin-left: 45rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  font-size: 30rpx;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #f6f6f6;
+  color: #ffffff;
+}
+.tagContainer {
+  width: 670rpx;
+  margin-top: 10rpx;
+  margin-bottom: 40rpx;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+.tagContainer .tag {
+  margin-right: 10rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  font-size: 26rpx;
+  border-radius: 20rpx;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #e6e6e6;
+  padding: 0rpx 20rpx;
+  margin-top: 10rpx;
+}
+.contentCard {
+  width: 95%;
+  margin-top: 20rpx;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 20rpx;
+  box-shadow: 2rpx 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+.contentCard .title {
+  width: 655rpx;
+  margin-top: 20rpx;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 36rpx;
+  line-height: 60rpx;
+  font-weight: 700;
+}
+.contentCard .contentWrapper {
+  width: 650rpx;
+  margin-top: 5rpx;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 50rpx;
+}
+.contentCard .contentWrapper .content {
+  font-size: 32rpx;
+  font-family: Helvetica, sans-serif;
+  color: #515151;
+  margin-bottom: 5rpx;
+}
+.contentCard .contentWrapper .content .exchangeName {
+  display: inline-block;
+  width: 220rpx;
+}
+.contentCard .contentWrapper .content .exchangeWord {
+  display: inline-block;
+}

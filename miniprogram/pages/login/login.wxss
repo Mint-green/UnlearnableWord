@@ -1,0 +1,138 @@
+.bgWrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -100;
+  background-image: linear-gradient(to bottom, #d0e6a5, #FFFFFF);
+}
+.bgWrapper .bg {
+  margin-left: -15%;
+  margin-top: -15%;
+  width: 130%;
+  height: 130%;
+}
+.wrapper {
+  width: 80%;
+  height: 500rpx;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 300rpx;
+  margin-bottom: auto;
+}
+.wrapper .title {
+  margin-top: 30rpx;
+  width: 100%;
+  font-size: 56rpx;
+  text-align: center;
+  font-weight: 800;
+  color: #819c4b;
+}
+.wrapper .inputField {
+  height: 70rpx;
+  font-size: 34rpx;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding-left: 20rpx;
+  border: solid 4rpx #e2e2e2;
+}
+.wrapper .username {
+  margin-top: 40rpx;
+  border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx;
+  border-bottom: 2rpx solid #e2e2e2;
+}
+.wrapper .middlePwd {
+  border-top: 2rpx solid #e2e2e2;
+  border-bottom: 2rpx solid #e2e2e2;
+  margin-top: -2rpx;
+}
+.wrapper .pwd {
+  border-bottom-left-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
+  border-top: 2rpx solid #e2e2e2;
+  margin-top: -2rpx;
+}
+.wrapper .btnWrapper {
+  margin-top: 10rpx;
+  width: 100%;
+  height: 40rpx;
+}
+.wrapper .btnWrapper .changeBtn {
+  width: 60rpx;
+  height: 40rpx;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  color: #819c4b;
+  font-weight: 500;
+}
+.wrapper .btnWrapper .loginBtn {
+  margin-left: 10rpx;
+}
+.wrapper .btnWrapper .registerBtn {
+  margin-right: 10rpx;
+}
+.wrapper .registerBtnWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+.wrapper .errmsg {
+  height: 50rpx;
+  width: 100%;
+  text-align: center;
+  line-height: 50rpx;
+  font-size: 30rpx;
+  color: #f76260;
+}
+.wrapper .submit {
+  margin-top: 0rpx;
+  width: 100%;
+  color: white;
+  background-color: #b9ce8e;
+}
+.wxLoginWrapper {
+  position: absolute;
+  bottom: 150rpx;
+  width: 100%;
+  height: 150rpx;
+  margin-left: 0;
+  margin-right: 0;
+}
+.wxLoginWrapper .loginBtn {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #2aae67;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wxLoginWrapper .loginBtn .logo {
+  width: 85%;
+  height: 85%;
+  border-radius: 50%;
+}
+.wxLoginWrapper .wxLoginTip {
+  margin-top: 20rpx;
+  width: 100%;
+  height: 24rpx;
+  font-size: 22rpx;
+  color: rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+.wasTaped {
+  filter: grayscale(30%);
+}
+.avatarPicTest {
+  width: 100rpx;
+  height: 100rpx;
+  margin-top: 50rpx;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 50rpx;
+}
+.avatarPicTest .pic {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50rpx;
+}

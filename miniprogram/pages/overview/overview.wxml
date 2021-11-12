@@ -1,0 +1,4 @@
+<!--pages/overview/overview.wxml-->
+<!-- <text>pages/overview/overview.wxml</text> -->
+
+<view class="bgWrapper" style='{{bgStyle}}'></view>

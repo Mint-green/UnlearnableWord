@@ -1,0 +1,15 @@
+<view>
+  <view class="top_tip">多存储类型，仅需一个云函数即可完成上传。</view>
+  <view class="box_text" wx:if="{{!imgSrc}}">上传的图片将展示在这里</view>
+  <view  wx:if="{{imgSrc}}" class="code_box">
+    <image class="code_img" src="{{imgSrc}}"></image>
+    <view class="img_info">
+      <view class="img_info_title">文件路径</view>
+      <view class="img_info_detail">{{imgSrc}}</view>
+    </view>
+  </view>
+  <view class="button" bindtap="uploadImg" wx:if="{{!haveGetImgSrc}}">上传一张图片</view>
+  <view class="button_clear" bindtap="clearImgSrc" wx:if="{{haveGetImgSrc}}">清空</view>
+  <view class="tip">在“资源管理器>miniprogram>pages>uploadFile>index.js”找到相应代码，体验该能力</view>
+  <cloud-tip-modal showUploadTipProps="{{showUploadTip}}"></cloud-tip-modal>
+</view>

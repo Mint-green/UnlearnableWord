@@ -1,0 +1,32 @@
+<!--pages/index/index.wxml-->
+<view class="bgWrapper">
+    <!-- <image class="bg" src='http://img5.adesk.com/5f084791e7bce75ea7b32005?sign=09a98b3c0f1f47aef3f3b5ea769e8f2e&t=617e5df6'></image> -->
+    <!-- <image class="bg" src='http://img5.adesk.com/6152ee26e7bce72b7e29e704?sign=a87f17288c7a42dee14b995e13685960&t=617e5df6'></image> -->
+    <!-- <image class="bg" src='http://img5.adesk.com/614d3b5de7bce72af5e521a6?sign=669901565e44793d729e841d30bf2db4&t=617e5df6'></image> -->
+</view>
+
+<view class="wrapper">
+    <view class="searchBtn" hover-class="wasTaped" bindtap="goSearch">
+        <view class="searchIcon iconfont icon-search"></view>
+    </view>
+    <view class="dailySentenceWrapper">
+        <view class="content">{{dailySentence[sentenceIndex].content}}</view>
+        <view class="voice iconfont icon-sound" bindtap='playVoice' wx:if="{{sentenceIndex != 2}}"></view>
+        <view class="translation">{{dailySentence[sentenceIndex].translation}}</view>
+    </view>
+
+    <view class="btnWrapper" wx:if="{{!isLogin}}">
+        <view class="loginBtn" bindtap="goLogin" hover-class="wasTaped">登录</view>
+    </view>
+
+    <view class="learnBtnWrapper" wx:if="{{isLogin}}">
+        <view class="both forLearn" hover-class="wasTaped">
+            <view class="text">学习</view>
+            <view class="number">1001</view>
+        </view>
+        <view class="both forReview" hover-class="wasTaped">
+            <view class="text">复习</view>
+            <view class="number">250</view>
+        </view>
+    </view>
+</view>
