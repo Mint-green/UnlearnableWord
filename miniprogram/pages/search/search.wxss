@@ -63,8 +63,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 10rpx;
-  margin-bottom: 130rpx;
 }
 .resultWrapper .result {
   width: 670rpx;
@@ -90,6 +88,18 @@
 }
 .resultWrapper .wasTaped {
   background-color: #e6e6e6;
+}
+.resultTips {
+  width: 100%;
+  height: 60rpx;
+  margin-bottom: 130rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.resultTips .text {
+  font-size: 28rpx;
+  color: #757575;
 }
 .historyWrapper {
   margin-top: 100rpx;

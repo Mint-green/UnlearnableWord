@@ -8,6 +8,10 @@ const error_message = [
     '账号或密码错误',
     '该账号已被注册',
     '两次输入密码不同',
+    '用户名仅能包含数字、中英文和下划线',
+    '用户名不能以下划线开头或结尾',
+    '密码仅能包含数字、英文字母和下划线',
+    '密码不能以下划线开头或结尾',
 ]
 const userApi = require("../../utils/userApi.js")
 const rescontent = require('../../utils/response_content.js')
@@ -23,12 +27,16 @@ Page({
         pwd: '',
         confirm_pwd: '',
     },
-    isUsernameChecked: false,
+    // isUsernameChecked: false,
 
     onLoad(options) {
         wx.setNavigationBarColor({
             backgroundColor: '#d0e6a5',
             frontColor: '#ffffff',
+        })
+
+        wx.setNavigationBarTitle({
+            title: '登录',
         })
     },
 
@@ -37,27 +45,60 @@ Page({
         let inputtype = e.target.dataset.inputtype
         let value = e.detail.value
         this.user[inputtype] = value
-        if (inputtype == "username") {
-            if (this.data.isregister) {
-                this.isUsernameChecked = false
-            }
-        }
-        console.log(inputtype, this.user[inputtype])
+        // if (inputtype == "username") {
+        //     if (this.data.isregister) {
+        //         this.isUsernameChecked = false
+        //     }
+        // }
+        // console.log(inputtype, this.user[inputtype])
     },
 
     async checkUsername() {
         let username = this.user.username
-        if (username == '') { return }
+        if (username == '') { return false }
+        if(!(this.checkUsernameVaild()))  return false
         console.log('check whether', username, 'have been registered')
         let res = await userApi.checkUsernameInDB({ username })
         console.log('checkUsername', res)
-        if (!res.errorcode) { return }
-        console.log(res)
+        if (!res.errorcode) { return false }
         if (res.data.isFind) {
             this.setErrType(3)
             return false
         }
-        this.isUsernameChecked = true
+        // this.isUsernameChecked = true
+        return true
+    },
+
+    checkUsernameVaild(register = true) {
+        // 用户名合法性判断，只能包含字母、数字、中文、下划线且不能以下划线开头或结尾
+        // let exp1 = /^(?!_)(?!.*?_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$/
+        let username = this.user.username
+        let exp1 = /^[a-zA-Z0-9_\u4e00-\u9fa5]+$/
+        let exp2 = /^(?!_)(?!.*?_$).+$/
+        if (!exp1.test(username)) {
+            this.setErrType(register ? 5 : 2)
+            return false
+        }
+        if (!exp2.test(username)) {
+            this.setErrType(register ? 6 : 2)
+            return false
+        }
+        return true
+    },
+
+    checkPwd(register = true) {
+        // 密码合法性判断，只能包含字母、数字、下划线且不能以下划线开头或结尾
+        let pwd = this.user.pwd
+        let exp1 = /^[a-zA-Z0-9_]+$/
+        let exp2 = /^(?!_)(?!.*?_$).+$/
+        if (!exp1.test(pwd)) {
+            this.setErrType(register ? 7 : 2)
+            return false
+        }
+        if (!exp2.test(pwd)) {
+            this.setErrType(register ? 8 : 2)
+            return false
+        }
         return true
     },
 
@@ -95,7 +136,7 @@ Page({
             pwd: '',
             confirm_pwd: '',
         }
-        this.isUsernameChecked = false
+        // this.isUsernameChecked = false
     },
 
     setErrType(errtype) {
@@ -108,7 +149,7 @@ Page({
     },
 
     async login() {
-        if (!(this.checkEmptyField())) {
+        if (!(this.checkEmptyField()) || !(this.checkUsernameVaild(false)) || !(this.checkPwd(false))) {
             return
         }
         console.log('try to login')
@@ -120,20 +161,20 @@ Page({
     },
 
     async register() {
-        if (!(this.checkEmptyField()) || !(this.checkTwoPwd())) {
+        if (!(this.checkEmptyField()) || !(this.checkPwd()) || !(this.checkTwoPwd())) {
             return
         }
-        if (!(this.isUsernameChecked)) {
-            let usernameOk = await this.checkUsername({ username: this.user.username })
-            if (!usernameOk) { return }
-            this.isUsernameChecked = true
-        }
+        // if (!(this.isUsernameChecked)) {
+        let usernameOk = await this.checkUsername()
+        if (!usernameOk) { return }
+        // this.isUsernameChecked = true
+        // }
         console.log('try to register')
         // return
         let username = this.user.username
         let pwd = this.user.pwd
         let res = await userApi.register({ username, pwd })
-        console.log(res)
+        // console.log(res)
         this.afterLogin(res)
     },
 
@@ -149,6 +190,7 @@ Page({
     },
 
     afterLogin(res) {
+        let duration = 1000
         if (res.errorcode == rescontent.LOGINERR.errorcode) {
             this.setErrType(2)
             return
@@ -156,30 +198,39 @@ Page({
             wx.showToast({
                 title: `注册成功`,
                 icon: 'none',
-                duration: 2000,
+                duration: duration,
             })
         } else if (res.errorcode == rescontent.LOGINOK.errorcode) {
             let lastlogin = formatTime(res.data.last_login)
             wx.showToast({
                 title: `登录成功，上次登录时间 ${lastlogin}`,
                 icon: 'none',
-                duration: 2000,
+                duration: duration,
             })
         } else {
-            // if (!res.errorcode) {
             wx.showToast({
                 title: '服务出错，请重试',
                 icon: 'none',
-                duration: 1500
+                duration: duration
             })
             return
         }
-        app.globalData.isLogin = true
-        app.globalData.userInfo = res.data
-        wx.navigateBack({
-            delta: 1,
-            complete: (res) => { console.log('navigate back complete', res) },
-        })
+
+        setTimeout(function () {
+            app.globalData.isLogin = true
+            app.globalData.userInfo = res.data
+            app.globalData.updatedForIndex = true
+            app.globalData.updatedForOverview = true
+            let storageContent = {
+                time: new Date().getTime(),
+                info: res.data,
+            }
+            wx.setStorageSync('userInfo', storageContent)
+            wx.navigateBack({
+                delta: 1,
+                complete: (res) => { console.log('navigate back complete', res) },
+            })
+        }, duration)
     },
 
 

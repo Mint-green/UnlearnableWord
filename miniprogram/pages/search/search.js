@@ -22,6 +22,7 @@ Page({
         haveResult: false,
         focus: false,
         DBtype: 0,
+        hasMore: true,
     },
     searchTimeId: -1,
 
@@ -29,6 +30,9 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        wx.setNavigationBarTitle({
+            title: '搜索',
+        })
         wx.setNavigationBarColor({
             backgroundColor: '#f6f6f6',
             frontColor: '#000000',
@@ -72,7 +76,7 @@ Page({
         let _this = this
         this.searchTimeId = setTimeout(() => {
             _this.getSearchResult(keyword);
-        }, 1500);
+        }, 500);
     },
 
     // 清空输入框
@@ -89,17 +93,21 @@ Page({
 
     // 获取搜索结果（原型+作为前缀搜索）
     // 会预先变成小写并检查keyword内容(正则) 缓存前缀字段的搜索结果
-    async getSearchResult(keyword) {
+    async getSearchResult(keyword, skip = 0, getLemma = true, clear = true) {
         // return
         if (keyword == '') {
             return
         }
         // console.log('trigger get result for', keyword)
         keyword = keyword.toLowerCase()
-        let exp = new RegExp('[^A-Za-z- \'\.]', 'g')
-        console.log('regexp test:', exp.test(keyword))
-        exp.lastIndex = 0
-        if (exp.test(keyword)) {
+        let expUnallow = new RegExp('[^A-Za-z- \u4e00-\u9fa5\'\.]', 'g')
+        let expSymbol = new RegExp('^[ -\'\.]+$', 'g')
+        // let zhExp = /[\u4e00-\u9fa5]/
+        let isInvalid = expUnallow.test(keyword)
+        let onlySymbol = expSymbol.test(keyword)
+        console.log('regexp is invalid test:', isInvalid)
+        console.log('regexp only symbol test:', onlySymbol)
+        if (isInvalid || onlySymbol) {
             this.setData({
                 lemmaResult: [],
                 directResult: [],
@@ -107,25 +115,46 @@ Page({
             console.log('invalid')
             return
         }
-        keyword = keyword.replace(/-/g, '')
-        keyword = keyword.replace(/\'/g, '\\\'')
-        keyword = keyword.replace(/\./g, '\\\.')
+
+        this.setData({
+            hasMore: true,
+        })
+        if (clear) {
+            this.setData({
+                lemmaResult: [],
+                directResult: [],
+            })
+        }
+        wx.showLoading({
+            title: '玩命记载中...',
+        })
         console.log(keyword)
         let DBtype = this.data.DBtype
+        let timer = setTimeout(function () {
+            wx.hideLoading()
+            wx.showToast({
+                title: '查询时间过长，已自动取消，请输入更精确的关键词',
+                icon: 'none',
+                duration: 1500,
+            })
+        }, 12000) // 由于大数据库耗时较长，设置超时时长12s(服务端设置的超时时间为10s)
         let res = await wordApi.getSearchResult({
             keyword,
             DBtype,
+            skip,
+            getLemma,
         })
-        wx.setStorageSync('searchresult', res.data)
         console.log(res)
-        this.transResult(res.data, keyword)
+        this.transResult(res.data, keyword, clear)
+        wx.hideLoading()
+        clearTimeout(timer)
+        this.isLoadingMore = false
     },
 
     // 处理获得的搜索结果，包括获取搜索词是原型的什么变换以及仅保留第一条解释
-    transResult(searchresult, keyword) {
+    transResult(searchresult, keyword, clear = true) {
         let lemmares = searchresult.lemmaSearch
         let directres = searchresult.directSearch
-        console.log('lemmares')
         for (let i = 0; i < lemmares.length; i++) {
             console.log(lemmares[i].exchange)
             let exchangeList = word_utils.toExchangeList(lemmares[i].exchange)
@@ -147,15 +176,25 @@ Page({
                 lemmares[i].translation = lemmares[i].translation.substring(0, lemmares[i].translation.indexOf('\n'))
             }
         }
-        console.log(lemmares)
-        console.log('directres')
+        console.log('lemmares', lemmares)
         for (let i = 0; i < directres.length; i++) {
             if (directres[i].translation.indexOf('\n') != -1) {
                 directres[i].translation = directres[i].translation.substring(0, directres[i].translation.indexOf('\n'))
             }
             // console.log('rect length of:', directres[i], word_utils.getResObjRectLength(directres[i]))
         }
-        console.log(directres)
+        console.log('directres', directres)
+
+        if (directres.length < 20) {
+            this.setData({
+                hasMore: false,
+            })
+        }
+        if (!clear) {
+            console.log('directResult before', this.data.directResult)
+            lemmares = this.data.lemmaResult
+            directres = this.data.directResult.concat(directres)
+        }
         this.setData({
             lemmaResult: lemmares,
             directResult: directres,
@@ -214,7 +253,6 @@ Page({
             this.setData({
                 history: []
             })
-            // wx.removeStorageSync('history')
         } else {
             let history = this.data.history
             history.splice(index, 1)
@@ -237,10 +275,21 @@ Page({
     },
 
     /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function () {
+        console.log('trigger get more')
+        if (!this.data.hasMore) return
+        if (this.isLoadingMore) return
+        this.isLoadingMore = true
+        this.getSearchResult(this.data.keyword, this.data.directResult.length, false, false)
+    },
+
+    /**
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
-        wx.setStorageSync('history', this.data.history)
+        // wx.setStorageSync('history', this.data.history)
     },
 
     /**

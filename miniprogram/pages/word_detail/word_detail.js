@@ -20,18 +20,28 @@ Page({
         colorType: 16,
         word_id: 0,
         wordDetail: {},
+        voiceUrl: '',
+        isInNotebook: false,
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        wx.setNavigationBarTitle({
+            title: '单词详情',
+        })
+
         let colorType = Math.floor(Math.random() * 17)
+        if (options.colorType) {
+            colorType = options.colorType
+        }
         wx.setNavigationBarColor({
             backgroundColor: colorList[colorType],
             frontColor: '#ffffff',
         })
         this.setData({ colorType })
+
         console.log(options)
         // let pages = getCurrentPages()
         // let thisPage = pages[pages.length-1]
@@ -42,32 +52,51 @@ Page({
     },
 
     async getDetail(word_id) {
-        // console.log(res)
-        // wx.setStorageSync('wordDetail', res.data)
-        // let wordDetail = res.data
-        let wordDetail = wx.getStorageSync('wordDetail')
-        if (wordDetail.word_id != word_id) {
-            let res = await wordApi.getWordDetail({ word_id })
-            wordDetail = res.data
-        }
-        let tagList = word_utils.getTagList(wordDetail)
-        let definitionList = wordDetail.definition.split('\n')
-        let transList = word_utils.toTransList(wordDetail.translation)
-        let exchangeList = word_utils.toExchangeList(wordDetail.exchange)
-        wordDetail.tag = tagList
-        wordDetail.definition = definitionList
-        wordDetail.translation = transList
-        wordDetail.exchange = exchangeList
+        let user_id = -1
+        let isLogin = app.globalData.isLogin
+        if (isLogin) user_id = app.globalData.userInfo.user_id
+        let res = await wordApi.getWordDetail({
+            word_id,
+            user_id,
+        })
+        let wordDetail = JSON.parse(JSON.stringify(res.data))
         console.log(wordDetail)
-        this.setData({ wordDetail })
+        wordDetail = word_utils.handleWordDetail(wordDetail)
+        console.log(wordDetail)
+        this.setData({
+            wordDetail,
+            isLogin,
+            isInNotebook: wordDetail.in_notebook,
+        })
+        let voiceUrl = word_utils.getWordVoiceUrl(wordDetail.word)
+        innerAudioContext.src = voiceUrl
     },
 
     playVoice() {
-        let word = this.data.wordDetail.word
-        let voiceUrl = word_utils.getWordVoiceUrl(word)
         innerAudioContext.stop()
-        innerAudioContext.src = voiceUrl
         innerAudioContext.play()
+    },
+
+    // 调整是否添加到生词本
+    toggleAddToNB: async function () {
+        let add = this.data.isInNotebook
+        let res = await wordApi.toggleAddToNB({
+            user_id: app.globalData.userInfo.user_id,
+            word_id: this.data.wordDetail.word_id,
+            add: !add,
+        })
+        console.log(res)
+        if (res.data) {
+            this.setData({
+                isInNotebook: !add,
+            })
+        } else {
+            wx.showToast({
+                title: '操作出错，请重试',
+                icon: 'none',
+                duration: 1000,
+            })
+        }
     },
 
     /**
@@ -95,7 +124,7 @@ Page({
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-
+        if (this.data.wordDetail.in_notebook != this.data.isInNotebook) app.globalData.updatedForOverview = true
     },
 
     /**

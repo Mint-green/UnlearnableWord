@@ -1,4 +1,169 @@
 <!--pages/overview/overview.wxml-->
-<!-- <text>pages/overview/overview.wxml</text> -->
 
-<view class="bgWrapper" style='{{bgStyle}}'></view>
+<view class="bgWrapper"></view>
+
+<view class="contentWarpper">
+    <!-- <view class="contentTitle">单词书</view> -->
+    <view class="contentCard">
+        <view class="title">单词书</view>
+        <view class="cardTop">
+            <view class="bookWrapper">
+                <view class="book" bindtap="showBookList">
+                    <view class="name">{{bkDetail.name}}</view>
+                </view>
+                <view class="tips">点击词书可以进行切换哦</view>
+            </view>
+            <view class="dataWrapper">
+                <view class="dataItem" hover-class="wasTaped" data-type="getBkLearnedWord" bindtap="getWordList">
+                    <view class="dataName">已学习</view>
+                    <view class="dataValue">{{bkLearnData.learn}}<text class="unit">词</text></view>
+                </view>
+                <view class="dataItem" hover-class="wasTaped" data-type="getBkMasteredWord" bindtap="getWordList">
+                    <view class="dataName">已掌握</view>
+                    <view class="dataValue">{{bkLearnData.master}}<text class="unit">词</text></view>
+                </view>
+                <view class="dataItem" hover-class="wasTaped" data-type="getBkUnlearnedWord" bindtap="getWordList">
+                    <view class="dataName">待学习</view>
+                    <view class="dataValue">{{bkLearnData.notLearn}}<text class="unit">词</text></view>
+                </view>
+                <view class="dataItem" hover-class="wasTaped" data-type="getBkWord" bindtap="getWordList">
+                    <view class="dataName">总词量</view>
+                    <view class="dataValue">{{bkDetail.total}}<text class="unit">词</text></view>
+                </view>
+            </view>
+        </view>
+        <view class="cardBottom">
+            <progress class="learnProgress" percent="{{bkLearnData.learn / bkDetail.total * 100}}" border-radius="6rpx"
+                stroke-width="12rpx" backgroundColor="#f0f0f0" activeColor="#fd6802" active-mode="backwards"></progress>
+            <view class="progressNum">
+                <view class="learned">已学习: {{bkLearnData.learn}}</view>
+                <view class="total">总词量: {{bkDetail.total}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="contentWarpper">
+    <!-- <view class="contentTitle">总览</view> -->
+    <view class="contentCard">
+        <view class="title">总览</view>
+        <view class="dataWrapper forAllData">
+            <view class="dataItem" hover-class="wasTaped" data-type="today" bindtap="getWordList">
+                <view class="dataName">
+                    <view class="dot"></view>今日学习&复习
+                </view>
+                <view class="dataValue">{{todayLearnData.learn + todayLearnData.review}}<text class="unit">词</text></view>
+            </view>
+            <view class="dataItem" hover-class="wasTaped" data-type="getLearnedWord" bindtap="getWordList">
+                <view class="dataName">
+                    <view class="dot"></view>累计学习
+                </view>
+                <view class="dataValue">{{allLearnData.learn}}<text class="unit">词</text></view>
+            </view>
+            <view class="dataItem" hover-class="wasTaped" data-type="getReviewWord" bindtap="getWordList">
+                <view class="dataName">
+                    <view class="dot"></view>复习中
+                </view>
+                <view class="dataValue">{{allLearnData.learn-allLearnData.master}}<text class="unit">词</text></view>
+            </view>
+            <view class="dataItem" hover-class="wasTaped" data-type="getMasteredWord" bindtap="getWordList">
+                <view class="dataName">
+                    <view class="dot"></view>已掌握
+                </view>
+                <view class="dataValue">{{allLearnData.master}}<text class="unit">词</text></view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="contentWarpper">
+    <!-- <view class="contentTitle">每日任务</view> -->
+    <view class="contentCard">
+        <view class="title">每日任务</view>
+        <view class="mpprogressWrapper">
+            <view class="taskProgress">
+                <mpProgress class="mpProgress" config="{{learnConfig}}" reset="{{learnReset}}"
+                    percentage="{{learnPercentage}}" isStop="{{false}}">
+                </mpProgress>
+                <view class="learnData">
+                    <view class="num">{{todayLearnData.learn}}<text class="workload">/{{dailyTask.dailyLearn}}</text></view>
+                    <view class="dec">今日已学习</view>
+                </view>
+            </view>
+            <view class="taskProgress">
+                <mpProgress class="mpProgress" config="{{reviewConfig}}" reset="{{reviewReset}}"
+                    percentage="{{reviewPercentage}}" isStop="{{false}}">
+                </mpProgress>
+                <view class="learnData">
+                    <view class="num">{{todayLearnData.review}}<text class="workload">/{{dailyTask.dailyReview}}</text></view>
+                    <view class="dec">今日已复习</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="contentWarpper">
+    <!-- <view class="contentTitle">历史</view> -->
+    <view class="contentCard">
+        <view class="title">收藏夹</view>
+        <view class="wordContainer" wx:if="{{notebookWord.length>0}}">
+            <view class="word" wx:for="{{notebookWord}}" wx:key="index" data-word_id="{{item.word_id}}"
+                hover-class="wasTaped" bindtap="toWordDetail">{{item.word}}</view>
+        </view>
+        <view class="tips" wx:if="{{notebookWord.length == 0}}">你还没有收藏词汇哦~</view>
+        <view class="moreBtn" wx:if="{{notebookWord.length == 10}}">
+            <view class="btn" hover-class="wasTaped" data-type="getNoteBookWord" bindtap="getWordList">查看更多</view>
+        </view>
+        <view class="bottom" wx:if="{{notebookWord.length < 10}}"></view>
+    </view>
+</view>
+
+<view class="contentWarpper">
+    <!-- <view class="contentTitle">历史</view> -->
+    <view class="contentCard">
+        <view class="title">历史</view>
+        <view class="eccanvasContainer">
+            <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+        </view>
+        <view class="dataWrapper forDailySum">
+            <view class="dataItem">
+                <view class="dataName">日期</view>
+                <view class="dataValue date">{{selectedDay.time}}</view>
+            </view>
+            <view class="dataItem">
+                <view class="dataName">学习</view>
+                <view class="dataValue">{{selectedDay.learn}}<text class="unit">词</text></view>
+            </view>
+            <view class="dataItem">
+                <view class="dataName">复习</view>
+                <view class="dataValue">{{selectedDay.review}}<text class="unit">词</text></view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="bottom"></view>
+
+<page-container show="{{isChangingBook}}" duration="{{1500}}" overlay="{{true}}" position="bottom" round="{{true}}" bind:afterleave="endChange" bind:enter="onEnter">
+    <scroll-view class="changeBookWrapper" scroll-y="{{true}}">
+        <view class="book" wx:for="{{allBkData}}" hover-class ='wasTaped' wx:key="index" data-index="{{index}}" bindtap="changeWordBook">
+            <view class="bookCover">
+                <view class="name">{{item.name}}</view>
+            </view>
+            <view class="info">
+                <view class="bookName">{{item.name}}</view>
+                <view class="des">{{item.description}}</view>
+                <view class="total">词汇量 <text class="num">{{item.total}}</text></view>
+            </view>
+        </view>
+    </scroll-view>
+</page-container>
+
+
+
+
+<!-- <button class="resetbtn" type="primary" bindtap="getControl">getControl</button> -->
+
+<!-- <button class="resetbtn" type="primary" bindtap="testAddLearningRecord">sendData</button> -->
+<!-- <button class="resetbtn" type="primary" bindtap="getBasicLearningData">getBasic</button> -->

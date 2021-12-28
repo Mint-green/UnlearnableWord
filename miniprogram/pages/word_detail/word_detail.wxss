@@ -4,19 +4,34 @@
   position: fixed;
   z-index: -100;
 }
-.bgWrapper .bg {
-  margin-left: -15%;
-  margin-top: -15%;
-  width: 130%;
-  height: 130%;
-}
 .word {
   margin-top: 70rpx;
   margin-left: 40rpx;
-  height: 60rpx;
-  font-size: 54rpx;
+  height: 80rpx;
+  font-size: 64rpx;
   font-weight: 700;
   line-height: 70rpx;
+  position: relative;
+}
+.word .notebookBtn {
+  position: absolute;
+  top: 0;
+  right: 10rpx;
+  width: 80rpx;
+  height: 80rpx;
+  font-size: 46rpx;
+  color: #f0f0f0;
+  line-height: 80rpx;
+  text-align: center;
+}
+.word .icon-addToNB-yes {
+  color: #fb6a00;
+}
+.word .wasTaped-bottom {
+  color: #ffffff;
+}
+.word .wasTaped-bottom1 {
+  filter: grayscale(20%);
 }
 .pron {
   margin-top: 20rpx;
@@ -25,7 +40,6 @@
   line-height: 40rpx;
   font-size: 30rpx;
   font-family: Arial, Helvetica, sans-serif;
-  color: #f6f6f6;
   color: #ffffff;
 }
 .tagContainer {
@@ -59,7 +73,7 @@
 }
 .contentCard .title {
   width: 655rpx;
-  margin-top: 20rpx;
+  margin-top: 26rpx;
   margin-left: auto;
   margin-right: auto;
   font-size: 36rpx;
@@ -68,16 +82,16 @@
 }
 .contentCard .contentWrapper {
   width: 650rpx;
-  margin-top: 5rpx;
+  margin-top: 14rpx;
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 50rpx;
 }
 .contentCard .contentWrapper .content {
   font-size: 32rpx;
-  font-family: Helvetica, sans-serif;
-  color: #515151;
-  margin-bottom: 5rpx;
+  color: #757575;
+  margin-bottom: 10rpx;
+  line-height: 40rpx;
 }
 .contentCard .contentWrapper .content .exchangeName {
   display: inline-block;
@@ -85,4 +99,12 @@
 }
 .contentCard .contentWrapper .content .exchangeWord {
   display: inline-block;
+}
+.contentCard .contentWrapper .content .pos {
+  font-size: 28rpx;
+  color: #a0a0a0;
+  margin-right: 10rpx;
+}
+.last {
+  margin-bottom: 50rpx;
 }

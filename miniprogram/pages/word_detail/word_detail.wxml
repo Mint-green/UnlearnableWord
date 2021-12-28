@@ -3,7 +3,12 @@
 <view class="bgWrapper bg-linear-{{colorType}}"></view>
 
 <view class="voicePlaying" bindtap="playVoice">
-    <view class="word word-color-{{colorType}}">{{wordDetail.word}}</view>
+    <view class="word word-color-{{colorType}}">
+        {{wordDetail.word}}
+        <view class="notebookBtn iconfont icon-addToNB-{{isInNotebook?'yes':'no'}}" wx:if="{{isLogin}}"
+            hover-class="wasTaped-bottom{{isInNotebook?'1':''}}" catchtap="toggleAddToNB"></view>
+    </view>
+
     <view class="pron" wx:if="{{wordDetail.phonetic.length>0}}">/ {{wordDetail.phonetic}} / <text
             class="voice iconfont icon-sound"></text></view>
     <view class="tagContainer" wx:if="{{wordDetail.tag.length>0}}">
@@ -11,22 +16,28 @@
     </view>
 </view>
 
-<view class="contentCard" wx:if="{{wordDetail.definition[0].length>0}}">
+<view class="contentCard" wx:if="{{wordDetail.definition.length>0}}">
     <view class="title content-title-color-{{colorType}}">英文释义</view>
     <view class="contentWrapper def">
-        <view class="content defRow" wx:for="{{wordDetail.definition}}" wx:key="index">{{item}}</view>
+        <!-- <view class="content defRow" wx:for="{{wordDetail.definition}}" wx:key="index">{{item}}</view> -->
+        <view class="content transRow" wx:for="{{wordDetail.definition}}" wx:key="index">
+            <text class="pos" wx:if="{{ item.pos != '' }}">{{item.pos}}</text>
+            <text class="meaning">{{item.meaning}}</text>
+        </view>
     </view>
 </view>
 
 <view class="contentCard" wx:if="{{wordDetail.translation.length>0}}">
     <view class="title content-title-color-{{colorType}}">中文释义</view>
     <view class="contentWrapper trans">
-        <view class="content transRow" wx:for="{{wordDetail.translation}}" wx:key="index">{{item.pos}} {{item.meaning}}
+        <view class="content transRow" wx:for="{{wordDetail.translation}}" wx:key="index">
+            <text class="pos" wx:if="{{ item.pos != '' }}">{{item.pos}}</text>
+            <text class="meaning">{{item.meaning}}</text>
         </view>
     </view>
 </view>
 
-<view class="contentCard" wx:if="{{wordDetail.exchange.length>0}}">
+<view class="contentCard last" wx:if="{{wordDetail.exchange.length>0}}">
     <view class="title content-title-color-{{colorType}}">词形变换</view>
     <view class="contentWrapper exchange">
         <view class="content exchangeRow" wx:for="{{wordDetail.exchange}}" wx:key="index">

@@ -1,0 +1,159 @@
+<!--pages/user_settings/user_settings.wxml-->
+
+<view class="optionList">
+    <!-- 倒计时与否-->
+    <view class="option">
+        <view class="optionName">遮挡单词或释义时倒计时</view>
+        <view class="optionValue">
+            <switch class="switch" checked="{{switchSettings.timing}}" data-type="timing" bindchange="switchChange">
+            </switch>
+        </view>
+    </view>
+    <!-- 倒计时时间 -->
+    <picker class="picker" header-text="倒计时时间(ms)" mode="selector" range="{{timingRange}}"
+        value="{{picker.timing_duration}}" data-type='timing_duration' bindchange="customPickerChange">
+        <view class="option" hover-class="wasTaped" wx:if="{{switchSettings.timing}}">
+            <view class="optionName">倒计时时间(ms)</view>
+            <view class="optionValue">{{customTypeValue.timing_duration}}</view>
+        </view>
+    </picker>
+    <!-- 每组单词数量 -->
+    <picker class="picker" header-text="每组单词数量" mode="selector" range="{{groupSizeRange}}" value="{{picker.group_size}}"
+        data-type='group_size' bindchange="customPickerChange">
+        <view class="option" hover-class="wasTaped">
+            <view class="optionName">每组单词数量</view>
+            <view class="optionValue">{{customTypeValue.group_size}}</view>
+        </view>
+    </picker>
+    <!-- 单词读音自动播放 -->
+    <view class="option">
+        <view class="optionName">单词自动发音</view>
+        <view class="optionValue">
+            <switch class="switch" checked="{{switchSettings.autoplay}}" data-type="autoplay" bindchange="switchChange">
+            </switch>
+        </view>
+    </view>
+    <!-- 发音美式or英式 -->
+    <picker class="picker" header-text="发音类型" mode="selector" range="{{voiceTypeRange}}" value="{{picker.voice_type}}"
+        data-type='voice_type' bindchange="pickerChange">
+        <view class="option" hover-class="wasTaped">
+            <view class="optionName">发音类型</view>
+            <view class="optionValue">{{voiceTypeRange[picker.voice_type]}}</view>
+        </view>
+    </picker>
+
+    <view class="split"></view>
+
+    <!-- 学习时次数及模式 -->
+    <picker class="picker" header-text="学习时重复次数" mode="selector" range="{{lRepeatRange}}"
+        value="{{picker.learn_repeat_t}}" data-type='learn_repeat_t' bindchange="pickerChange">
+        <view class="option" hover-class="wasTaped">
+            <view class="optionName">学习时重复次数</view>
+            <view class="optionValue">{{lRepeatRange[picker.learn_repeat_t]}}</view>
+        </view>
+    </picker>
+    <picker class="picker" header-text="第一次重复题型" mode="selector" range="{{modeNameRange}}"
+        value="{{picker.learn_first_m}}" data-type='learn_first_m' bindchange="pickerChange">
+        <view class="option" hover-class="wasTaped">
+            <view class="optionName">第一次重复题型</view>
+            <view class="optionValue">{{modeNameRange[picker.learn_first_m]}}</view>
+        </view>
+    </picker>
+    <picker class="picker" header-text="第二次重复题型" mode="selector" range="{{modeNameRange}}"
+        value="{{picker.learn_second_m}}" data-type='learn_second_m' bindchange="pickerChange"
+        wx:if="{{(picker.learn_repeat_t + 1) >= 2}}">
+        <view class="option" hover-class="wasTaped">
+            <view class="optionName">第二次重复题型</view>
+            <view class="optionValue">{{modeNameRange[picker.learn_second_m]}}</view>
+        </view>
+    </picker>
+    <picker class="picker" header-text="第三次重复题型" mode="selector" range="{{modeNameRange}}"
+        value="{{picker.learn_third_m}}" data-type='learn_third_m' bindchange="pickerChange"
+        wx:if="{{(picker.learn_repeat_t + 1) >= 3}}">
+        <view class="option" hover-class="wasTaped">
+            <view class="optionName">第三次重复题型</view>
+            <view class="optionValue">{{modeNameRange[picker.learn_third_m]}}</view>
+        </view>
+    </picker>
+    <picker class="picker" header-text="第四次重复题型" mode="selector" range="{{modeNameRange}}"
+        value="{{picker.learn_fourth_m}}" data-type='learn_fourth_m' bindchange="pickerChange"
+        wx:if="{{(picker.learn_repeat_t + 1) == 4}}">
+        <view class="option" hover-class="wasTaped">
+            <view class="optionName">第四次重复题型</view>
+            <view class="optionValue">{{modeNameRange[picker.learn_fourth_m]}}</view>
+        </view>
+    </picker>
+
+    <view class="split"></view>
+
+    <!-- 复习时次数及模式 -->
+    <picker class="picker" header-text="复习时重复次数" mode="selector" range="{{rRepeatRange}}"
+        value="{{picker.review_repeat_t}}" data-type='review_repeat_t' bindchange="pickerChange">
+        <view class="option" hover-class="wasTaped">
+            <view class="optionName">复习时重复次数</view>
+            <view class="optionValue">{{rRepeatRange[picker.review_repeat_t]}}</view>
+        </view>
+    </picker>
+    <picker class="picker" header-text="第一次重复题型" mode="selector" range="{{modeNameRange}}"
+        value="{{picker.review_first_m}}" data-type='review_first_m' bindchange="pickerChange">
+        <view class="option" hover-class="wasTaped">
+            <view class="optionName">第一次重复题型</view>
+            <view class="optionValue">{{modeNameRange[picker.review_first_m]}}</view>
+        </view>
+    </picker>
+    <picker class="picker" header-text="重复/错误后第二次题型" mode="selector" range="{{modeNameRange}}"
+        value="{{picker.review_second_m}}" data-type='review_second_m' bindchange="pickerChange">
+        <view class="option" hover-class="wasTaped">
+            <view class="optionName">重复/错误后第二次题型</view>
+            <view class="optionValue">{{modeNameRange[picker.review_second_m]}}</view>
+        </view>
+    </picker>
+    <picker class="picker" header-text="重复/错误后第三次题型" mode="selector" range="{{modeNameRange}}"
+        value="{{picker.review_third_m}}" data-type='review_third_m' bindchange="pickerChange">
+        <view class="option" hover-class="wasTaped">
+            <view class="optionName">重复/错误后第三次题型</view>
+            <view class="optionValue">{{modeNameRange[picker.review_third_m]}}</view>
+        </view>
+    </picker>
+
+    <view class="split"></view>
+
+    <!-- 每日任务模式及词量 -->
+    <view class="option">
+        <view class="optionName">每日任务</view>
+        <view class="optionValue">
+            <switch class="switch" checked="{{switchSettings.daily_task}}" data-type="daily_task"
+                bindchange="switchChange">
+            </switch>
+        </view>
+    </view>
+    <picker class="picker" header-text="每日学习量(每组词量倍数)" mode="selector" range="{{taskLoadRange}}"
+        value="{{picker.daily_learn}}" data-type='daily_learn' bindchange="customPickerChange"
+        wx:if="{{switchSettings.daily_task}}">
+        <view class="option" hover-class="wasTaped">
+            <view class="optionName">每日学习量(整数组单词)</view>
+            <view class="optionValue">{{customTypeValue.daily_learn * customTypeValue.group_size}}</view>
+        </view>
+    </picker>
+    <picker class="picker" header-text="每日复习量(每组词量倍数)" mode="selector" range="{{taskLoadRange}}"
+        value="{{picker.daily_review}}" data-type='daily_review' bindchange="customPickerChange"
+        wx:if="{{switchSettings.daily_task}}">
+        <view class="option" hover-class="wasTaped">
+            <view class="optionName">每日复习量(整数组单词)</view>
+            <view class="optionValue">{{customTypeValue.daily_review * customTypeValue.group_size}}</view>
+        </view>
+    </picker>
+</view>
+
+<!-- <view class="mask" wx:if="{{isCustomize}}"></view> -->
+<page-container show="{{isCustomize}}" duration="{{500}}" overlay="{{true}}" position="bottom" round="{{true}}"
+    bind:afterleave="pageleave" bind:enter="onEnter">
+    <view class="customizeWrapper">
+        <input type="text" class="customValue" value="{{inputValue}}" always-embed="{{true}}"
+            placeholder="{{placeholder}}" placeholder-class="placeHolder" focus="{{focus}}" bindinput="handleInput"
+            confirm-type="done" bindconfirm="onConfirmInput" />
+        <view class="btn" hover-class="wasTaped" bindtap="confirmCustomize">确认</view>
+    </view>
+</page-container>
+
+<!-- <button class="resetbtn" type="primary" bindtap="getControl">getControl</button> -->

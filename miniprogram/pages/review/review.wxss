@@ -1,0 +1,382 @@
+.bgWrapper {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: -100;
+}
+.topline {
+  width: 100%;
+  height: 60rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.topline .progress {
+  font-size: 32rpx;
+  color: #f6f6f6;
+}
+.wordWrapper {
+  margin-top: 30rpx;
+  width: 100%;
+  height: 500rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+.wordWrapper .word {
+  font-size: 75rpx;
+  font-weight: 700;
+  margin-bottom: 10rpx;
+}
+.wordWrapper .repeatTime {
+  margin-bottom: 20rpx;
+  width: 150rpx;
+  height: 16rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wordWrapper .repeatTime .times {
+  width: 20rpx;
+  height: 10rpx;
+  border-radius: 5rpx;
+  margin-left: 16rpx;
+  box-shadow: 2rpx 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+.wordWrapper .repeatTime .first {
+  margin-left: 0rpx;
+}
+.wordWrapper .repeatTime .bg {
+  background-color: #ffffff;
+}
+.wordWrapper .pron {
+  font-size: 34rpx;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #ffffff;
+}
+.wordWrapper .timing {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.wordWrapper .timing .progress {
+  width: 100rpx;
+  height: 100rpx;
+}
+.wordWrapper .timing .resetbtn {
+  margin-top: 20rpx;
+}
+.wordWrapper .timing .model {
+  width: 300rpx;
+  height: 70rpx;
+  opacity: 0.3;
+  border-radius: 16rpx;
+  box-shadow: 2rpx 2rpx 15rpx rgba(0, 0, 0, 0.1), -2rpx -2rpx 15rpx rgba(0, 0, 0, 0.1);
+  background-image: linear-gradient(to right, #cdcdcd, #ffffff);
+}
+.wordWrapper .timing .phonetic {
+  margin-top: 20rpx;
+  width: 150rpx;
+  height: 50rpx;
+  border-radius: 10rpx;
+}
+.content {
+  position: absolute;
+  bottom: 260rpx;
+  width: 100%;
+  height: 650rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+.content .chooseCorrect .choice {
+  margin-bottom: 15rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 30rpx;
+  height: 135rpx;
+  width: 670rpx;
+  border-radius: 15rpx;
+  box-shadow: 2rpx 2rpx 5rpx rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.content .chooseCorrect .choice .pos {
+  font-size: 24rpx;
+  line-height: 30rpx;
+  font-weight: 600;
+  color: #a0a0a0;
+  min-width: 36rpx;
+  margin-right: 10rpx;
+}
+.content .chooseCorrect .choice .meaning {
+  font-size: 32rpx;
+  line-height: 40rpx;
+  font-weight: 600;
+  color: #757575;
+}
+.content .chooseCorrect .rightChoice {
+  background-color: #b1dfc9;
+}
+.content .chooseCorrect .falseChoice {
+  background-color: #fdbaba;
+}
+.content .chooseCorrect .wasTaped {
+  background-color: rgba(150, 150, 150, 0.4);
+}
+.content .translationWrapper {
+  max-width: 85%;
+}
+.content .translationWrapper .transRow {
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: flex-end;
+}
+.content .translationWrapper .transRow .pos {
+  font-size: 28rpx;
+  line-height: 30rpx;
+  font-weight: 600;
+  color: #a0a0a0;
+  min-width: 36rpx;
+  margin-right: 10rpx;
+}
+.content .translationWrapper .transRow .meaning {
+  font-size: 36rpx;
+  line-height: 40rpx;
+  font-weight: 600;
+  color: #757575;
+}
+.content .translationWrapper .transRow .moreBtn {
+  width: 150rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #a0a0a0;
+  margin-left: auto;
+  margin-right: auto;
+}
+.content .translationWrapper .transRow .tapedText {
+  color: #757575;
+}
+.content .timing {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.content .timing .progress {
+  width: 100rpx;
+  height: 100rpx;
+}
+.content .timing .resetbtn {
+  margin-top: 20rpx;
+}
+.content .timing .model {
+  width: 350rpx;
+  height: 50rpx;
+  margin-bottom: 20rpx;
+  border-radius: 10rpx;
+  box-shadow: 2rpx 2rpx 15rpx rgba(0, 0, 0, 0.1), -2rpx -2rpx 15rpx rgba(0, 0, 0, 0.1);
+  background-image: linear-gradient(to right, #cdcdcd, #ffffff);
+  opacity: 0.3;
+}
+.control {
+  position: absolute;
+  bottom: 20rpx;
+  width: 100%;
+  height: 230rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.control .btn {
+  height: 120rpx;
+  border-radius: 15rpx;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.control .btn .text {
+  font-size: 34rpx;
+}
+.control .btn .decorate {
+  margin-top: 10rpx;
+  width: 30rpx;
+  height: 10rpx;
+  border-radius: 5rpx;
+}
+.control .knowWrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.control .knowWrapper .knowBtn {
+  width: 210rpx;
+  margin-left: 30rpx;
+}
+.control .knowWrapper .knowBtn .notknowtext {
+  color: #a0a0a0;
+}
+.control .knowWrapper .knowBtn .dforNotKnow {
+  background-color: #cdcdcd;
+}
+.control .knowWrapper .twoBtn {
+  width: 330rpx;
+}
+.control .knowWrapper .left {
+  margin-left: 0rpx;
+}
+.control .wasTaped {
+  background-color: rgba(150, 150, 150, 0.1);
+}
+.control .answerBtn {
+  width: 700rpx;
+}
+.control .answerBtn .text {
+  color: #a0a0a0;
+}
+.control .answerBtn .decorate {
+  background-color: #cdcdcd;
+}
+.control .nextBtn {
+  width: 700rpx;
+}
+.control .bottomMenu {
+  height: 80rpx;
+  width: 100%;
+  margin-top: 40rpx;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.control .bottomMenu .bottomBtn {
+  width: 100rpx;
+  height: 70rpx;
+  font-size: 46rpx;
+  font-weight: 600;
+  color: #cdcdcd;
+  line-height: 70rpx;
+  text-align: center;
+}
+.control .bottomMenu .icon-addToNB-yes {
+  color: #fb6a00;
+}
+.control .bottomMenu .wasTaped-bottom {
+  color: #a0a0a0;
+}
+.control .bottomMenu .wasTaped-bottom1 {
+  filter: grayscale(20%);
+}
+.doneWrapper {
+  width: 750rpx;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 10;
+}
+.doneWrapper .text {
+  font-size: 50rpx;
+  font-weight: 700;
+  margin-top: -100rpx;
+  margin-bottom: 100rpx;
+}
+.doneWrapper .decorate {
+  width: 690rpx;
+  height: 4rpx;
+  border-radius: 2rpx;
+}
+.doneWrapper .reviewResWrapper {
+  width: 750rpx;
+  min-height: 460rpx;
+  max-height: 660rpx;
+  padding-bottom: 10rpx;
+}
+.doneWrapper .reviewResWrapper .item {
+  width: 750rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+}
+.doneWrapper .reviewResWrapper .item .word {
+  margin-left: 40rpx;
+}
+.doneWrapper .reviewResWrapper .item .interval {
+  margin-right: 40rpx;
+}
+.doneWrapper .reviewResWrapper .title {
+  font-size: 28rpx;
+  height: 40rpx;
+  margin-top: 20rpx;
+}
+.doneWrapper .reviewResWrapper .words {
+  font-size: 32rpx;
+  height: 80rpx;
+}
+.doneWrapper .reviewResWrapper .words .word {
+  color: #757575;
+}
+.doneWrapper .reviewResWrapper .words .interval {
+  color: #8a8a8a;
+}
+.doneWrapper .reviewResWrapper .words .mastered {
+  margin-right: 40rpx;
+}
+.doneWrapper .btnWraper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50rpx;
+}
+.doneWrapper .btnWraper .btn {
+  width: 300rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 40rpx;
+  font-weight: 600;
+  font-size: 32rpx;
+}
+.doneWrapper .btnWraper .back {
+  background-color: rgba(150, 150, 150, 0.4);
+  color: #ffffff;
+  margin-right: 50rpx;
+}
+.doneWrapper .btnWraper .continue {
+  color: #ffffff;
+}
+.doneWrapper .btnWraper .wasTaped {
+  opacity: 0.6;
+}
+.test {
+  position: absolute;
+  top: 50rpx;
+  right: 20rpx;
+  display: flex;
+}
+.test .showInfo {
+  width: 150rpx;
+  font-size: 28rpx;
+  height: 36rpx;
+  border-radius: 6rpx;
+  background-color: #f6f6f6;
+  padding: 0;
+  margin-right: 20rpx;
+}

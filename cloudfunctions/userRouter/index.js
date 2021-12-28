@@ -45,12 +45,30 @@ exports.main = async (event, context) => {
         userinfo.pwd = event.pwd
         userinfo.c_time = time.toISOString()
         userinfo.last_login = userinfo.c_time
-        userinfo.l_book_id = ''
+        userinfo.l_book_id = -1
         userinfo.settings = {}
         userinfo.open_id = ''
         userinfo.wx_user = false
         random_num = Math.floor(Math.random() * 3) + 1
         userinfo.avatar_pic = 'cloud://music-cloud-1v7x1.6d75-music-cloud-1v7x1-1302160851/avatar_pic/default_' + random_num + '.jpg'
+        userinfo.of_matrix = {
+            '1.3': [5],
+            '1.4': [5],
+            '1.5': [5],
+            '1.6': [5],
+            '1.7': [5],
+            '1.8': [5],
+            '1.9': [5],
+            '2.0': [5],
+            '2.1': [5],
+            '2.2': [5],
+            '2.3': [5],
+            '2.4': [5],
+            '2.5': [5],
+            '2.6': [5],
+            '2.7': [5],
+            '2.8': [5],
+        }
 
         try {
             let res1 = await learnerDB.orderBy('user_id', 'desc').limit(1).get()    // 获得当前最大的user_id
@@ -99,6 +117,7 @@ exports.main = async (event, context) => {
                 c_time: false,
                 open_id: false,
                 pwd: false,
+                of_matrix: false,
             }).get()
             if (res1.data.toString() == "") {
                 ctx.body = { ...rescontent.LOGINERR }
@@ -134,7 +153,6 @@ exports.main = async (event, context) => {
 
         try {
             let res1 = await learnerDB.where({
-                username,
                 open_id
             }).limit(1).field({ // 尝试获取用户的基本数据(user_id、词书、设置等)
                 _id: false,
@@ -149,11 +167,29 @@ exports.main = async (event, context) => {
                 userinfo.pwd = ''
                 userinfo.c_time = time.toISOString()
                 userinfo.last_login = userinfo.c_time
-                userinfo.l_book_id = ''
+                userinfo.l_book_id = -1
                 userinfo.settings = { auto_update_avatar: ture }
                 userinfo.open_id = open_id
                 userinfo.wx_user = true
                 userinfo.avatar_pic = event.avatar_pic
+                userinfo.of_matrix = {
+                    '1.3': [5],
+                    '1.4': [5],
+                    '1.5': [5],
+                    '1.6': [5],
+                    '1.7': [5],
+                    '1.8': [5],
+                    '1.9': [5],
+                    '2.0': [5],
+                    '2.1': [5],
+                    '2.2': [5],
+                    '2.3': [5],
+                    '2.4': [5],
+                    '2.5': [5],
+                    '2.6': [5],
+                    '2.7': [5],
+                    '2.8': [5],
+                }
                 let res2 = await learnerDB.orderBy('user_id', 'desc').limit(1).get()
                 userinfo.user_id = res2.data[0].user_id + 1
                 let res3 = await learnerDB.add({ data: userinfo })
@@ -192,6 +228,143 @@ exports.main = async (event, context) => {
                 }
                 console.log('Done', new Date().getTime())
                 ctx.body = { ...rescontent.LOGINOK, data: res1.data[0] }
+            }
+        } catch (e) { // 抛出错误
+            console.error(e)
+            ctx.body = { ...rescontent.DBERR, err: e }
+        }
+    })
+
+    app.router('changeWordBook', async (ctx, next) => {
+        let user_id = event.user_id
+        let wd_bk_id = event.wd_bk_id
+
+        try {
+            let res = await db.collection('learner')
+                .where({
+                    user_id
+                })
+                .update({
+                    data: {
+                        l_book_id: wd_bk_id,
+                    }
+                })
+
+            console.log(res)
+            let data = false
+            if (res.stats.updated == 1) {
+                data = true
+            }
+
+            ctx.body = { ...rescontent.SUCCESS, data: data }
+        } catch (e) { // 抛出错误
+            console.error(e)
+            ctx.body = { ...rescontent.DBERR, err: e }
+        }
+    })
+
+    app.router('changeSettings', async (ctx, next) => {
+        let user_id = event.user_id
+        let settings = event.settings
+
+        try {
+            let res = await db.collection('learner')
+                .where({
+                    user_id
+                })
+                .update({
+                    data: {
+                        settings: settings,
+                    }
+                })
+
+            console.log(res)
+            let data = false
+            if (res.stats.updated == 1) {
+                data = true
+            }
+
+            ctx.body = { ...rescontent.SUCCESS, data: data }
+        } catch (e) { // 抛出错误
+            console.error(e)
+            ctx.body = { ...rescontent.DBERR, err: e }
+        }
+    })
+
+    app.router('changeUserInfo', async (ctx, next) => {
+        let user_id = event.user_id
+        let fieldName = event.type
+        let value = event.value
+        let validRange = ['username', 'avatar_pic', 'l_book_id', 'settings']
+
+        if (validRange.indexOf(fieldName) == -1) {
+            ctx.body = { ...rescontent.DATAERR }
+            return
+        }
+
+        try {
+            let updateData = {}
+            updateData[fieldName] = value
+            let res = await db.collection('learner')
+                .where({
+                    user_id
+                })
+                .update({
+                    data: updateData
+                })
+
+            console.log(res)
+            let data = false
+            if (res.stats.updated == 1) {
+                data = true
+            }
+
+            ctx.body = { ...rescontent.SUCCESS, data: data }
+        } catch (e) { // 抛出错误
+            console.error(e)
+            ctx.body = { ...rescontent.DBERR, err: e }
+        }
+    })
+
+    app.router('getUserInfoViaId', async (ctx, next) => {
+        let user_id = event.user_id
+        let time = new Date()
+        let last_login = time.toISOString()
+
+        try {
+            let updateRes = db.collection('learner')
+                .where({
+                    user_id,
+                }).update({
+                    data: { last_login: last_login }
+                })
+            let getRes = db.collection('learner')
+                .where({
+                    user_id
+                })
+                .field({
+                    _id: -1,
+                    user_id: 1,
+                    wx_user: 1,
+                    username: 1,
+                    avatar_pic: 1,
+                    l_book_id: 1,
+                    settings: 1,
+                    last_login: 1,
+                })
+                .get()
+
+            let resList = await Promise.all([updateRes, getRes])
+
+            let state = false
+            if (resList[0].stats.updated == 1 && resList[1].data.length == 1) {
+                state = true
+                resList[1].data[0].last_login = last_login
+            }
+            if (state) {
+                ctx.body = { ...rescontent.SUCCESS, data: resList[1].data[0] }
+            } else {
+                ctx.body = { ...rescontent.LOGINERR, data: '自动登录失败' }
             }
         } catch (e) { // 抛出错误
             console.error(e)

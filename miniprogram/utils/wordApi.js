@@ -49,11 +49,409 @@ const getWordDetail = (data) => {
     })
 }
 
+const getBasicLearningData = (data) => {
+    // let data = {}
+    data.$url = 'getBasicLearningData'
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "wordRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
+
+const getLearningData = (data) => {
+    // let data = {}
+    data.$url = 'getLearningData'
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "wordRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
+
+const getReviewData = (data) => {
+    // let data = {}
+    data.$url = 'getReviewData'
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "wordRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
+
+const toggleAddToNB = (data) => {
+    // let data = {}
+    data.$url = 'toggleAddToNB'
+    // data.user_id = getApp().globalData.userInfo.user_id
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "wordRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
+
+const addLearningRecord = (data) => {
+    // let data = {}
+    // 重复添加的官方errCode是-502001，在返回的err里
+    data.$url = 'addLearningRecord'
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "wordRouter",
+            // name: "learningRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
+
+const updateLearningRecord = (data) => {
+    // let data = {}
+    data.$url = 'updateLearningRecord'
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "wordRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
+
+const getWBLearnData = (data) => {
+    // let data = {}
+    data.$url = 'getWBLearnData'
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "statisticRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
+
+const getAllWBData = () => {
+    let data = {}
+    data.$url = 'getAllWBData'
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "statisticRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
+
+const getSingleWBData = (data) => {
+    // let data = {}
+    data.$url = 'getSingleWBData'
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "statisticRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
+
+const getAllLearnData = (data) => {
+    // let data = {}
+    data.$url = 'getAllLearnData'
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "statisticRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
+
+const getDailySum = (data) => {
+    // let data = {}
+    data.$url = 'getDailySum'
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "statisticRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
+
+const getTodayLearnData = (data) => {
+    // let data = {}
+    data.$url = 'getTodayLearnData'
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "statisticRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
+
+const getNoteBookWord = (data) => {
+    // let data = {}
+    data.$url = 'getNoteBookWord'
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "statisticRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
+
+const getBkLearnedWord = (data) => {
+    // let data = {}
+    data.$url = 'getBkLearnedWord'
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "statisticRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
+
+const getBkMasteredWord = (data) => {
+    // let data = {}
+    data.$url = 'getBkMasteredWord'
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "statisticRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
+
+const getBkUnlearnedWord = (data) => {
+    // let data = {}
+    data.$url = 'getBkUnlearnedWord'
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "statisticRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
+
+const getBkWord = (data) => {
+    // let data = {}
+    data.$url = 'getBkWord'
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "statisticRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
+
+const getLearnedWord = (data) => {
+    // let data = {}
+    data.$url = 'getLearnedWord'
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "statisticRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
+
+const getMasteredWord = (data) => {
+    // let data = {}
+    data.$url = 'getMasteredWord'
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "statisticRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
+
+const getReviewWord = (data) => {
+    // let data = {}
+    data.$url = 'getReviewWord'
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "statisticRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
+
+const getTodayLearnWord = (data) => {
+    // let data = {}
+    data.$url = 'getTodayLearnWord'
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "statisticRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
+
+const getTodayReviewWord = (data) => {
+    // let data = {}
+    data.$url = 'getTodayReviewWord'
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "statisticRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
 
 module.exports = {
     getDailySentence: getDailySentence,
     getSearchResult: getSearchResult,
     getWordDetail: getWordDetail,
+    getBasicLearningData: getBasicLearningData,
+    getLearningData: getLearningData,
+    getReviewData: getReviewData,
+    toggleAddToNB: toggleAddToNB,
+    addLearningRecord: addLearningRecord,
+    updateLearningRecord: updateLearningRecord,
+    getWBLearnData: getWBLearnData,
+    getAllWBData: getAllWBData,
+    getSingleWBData: getSingleWBData,
+    getAllLearnData: getAllLearnData,
+    getDailySum: getDailySum,
+    getTodayLearnData: getTodayLearnData,
+    getNoteBookWord: getNoteBookWord,
+    getBkLearnedWord: getBkLearnedWord,
+    getBkMasteredWord: getBkMasteredWord,
+    getBkUnlearnedWord: getBkUnlearnedWord,
+    getBkWord: getBkWord,
+    getLearnedWord: getLearnedWord,
+    getMasteredWord: getMasteredWord,
+    getReviewWord: getReviewWord,
+    getTodayLearnWord: getTodayLearnWord,
+    getTodayReviewWord: getTodayReviewWord,
 }
 
 

@@ -1,0 +1,119 @@
+<!--pages/learning/learning.wxml-->
+
+<view class="bgWrapper bg-linear-{{colorType}}"></view>
+
+<view class="topline" wx:if="{{!learnDone}}">
+    <view class="progress">{{learnedNum}} / {{learnNum}}</view>
+</view>
+
+<view class="wordWrapper" bindtap="playVoice" wx:if="{{!learnDone}}">
+    <view class="word word-color-{{colorType}}" wx:if="{{ wordMode == 0 }}">{{wordDetail.word}}</view>
+    <view class="repeatTime" wx:if="{{ wordMode == 0 }}">
+        <view class="times first {{ thisWordRepeatTime>=1? 'bg-color-light-'+colorType : 'bg' }}"
+            wx:if="{{ repeatTimes>1 }}"></view>
+        <view class="times {{ thisWordRepeatTime>=2? 'bg-color-light-'+colorType : 'bg' }}"
+            wx:if="{{ repeatTimes>=2 }}"></view>
+        <view class="times {{ thisWordRepeatTime>=3? 'bg-color-light-'+colorType : 'bg' }}"
+            wx:if="{{ repeatTimes>=3 }}"></view>
+        <view class="times {{ thisWordRepeatTime==4? 'bg-color-light-'+colorType : 'bg' }}"
+            wx:if="{{ repeatTimes==4 }}"></view>
+    </view>
+    <view class="pron" wx:if="{{ wordMode == 0 && wordDetail.phonetic.length > 0 }}">/ {{wordDetail.phonetic}} / <text
+            class="voice iconfont icon-sound"></text></view>
+    <view class="timing" wx:if="{{ wordMode == 1 }}" catchtap="{{ isBtnActive? 'showWord':'' }}">
+        <mpProgress class="progress" config="{{wordTimingConfig}}" reset="{{wordTimingReset}}"
+            isStop="{{wordTimingStop}}" percentage="{{100}}" bindtimingOut="timingOut" data-type="word"></mpProgress>
+        <!-- <button class="resetbtn" type="primary" bindtap="resetCanvasFunc">reset</button> -->
+    </view>
+    <view class="timing" wx:if="{{ wordMode == 2 }}">
+        <view class="model"></view>
+        <view class="model phonetic"></view>
+    </view>
+</view>
+
+<view class="content" wx:if="{{!learnDone}}">
+    <view class="chooseCorrect" wx:if="{{ contentMode == 0 }}">
+        <view class="choice {{choiceBgList[index]}}" wx:for="{{choiceOrder}}" wx:key="index" hover-class="wasTaped"
+            data-index="{{index}}" bindtap="{{ isBtnActive? 'checkChoice':'' }}">
+            <view class="pos">{{wrongTransWordList[item].translation.pos}}</view>
+            <view class="meaning"> {{wrongTransWordList[item].translation.meaning}}</view>
+        </view>
+    </view>
+    <view class="translationWrapper" wx:if="{{ contentMode == 1 }}">
+        <view class="transRow" wx:for="{{wordDetail.shortTrans}}" wx:key="index">
+            <view class="pos" wx:if="{{ item.pos != '' }}">{{item.pos}}</view>
+            <view class="meaning {{ item.more? 'moreBtn':'' }}" bindtap="{{ item.more? 'toDetail':'' }}"
+                hover-class="{{ item.more? 'tapedText':'' }}">{{item.meaning}}
+            </view>
+        </view>
+    </view>
+    <view class="timing" wx:if="{{ contentMode == 2 }}" bindtap="{{ isBtnActive? 'showTrans':'' }}">
+        <mpProgress class="progress" config="{{contentTimingConfig}}" reset="{{contentTimingReset}}"
+            isStop="{{contentTimingStop}}" percentage="{{100}}" bindtimingOut="timingOut" data-type="content">
+        </mpProgress>
+        <!-- <button class="resetbtn" type="primary" bindtap="resetCanvasFunc">reset</button> -->
+    </view>
+    <view class="timing" wx:if="{{ contentMode == 3 }}" bindtap="{{ isBtnActive? 'showTrans':'' }}">
+        <view class="model"></view>
+        <view class="model"></view>
+        <view class="model"></view>
+    </view>
+</view>
+
+<view class="control" wx:if="{{!learnDone}}">
+    <view class="btn answerBtn" wx:if="{{ controlMode == 0 }}" hover-class="wasTaped"
+        bindtap="{{ isBtnActive? 'showAnswer':'' }}">
+        <view class="text">答案</view>
+        <view class="decorate"></view>
+    </view>
+    <view class="knowWrapper" wx:if="{{ controlMode == 1 }}">
+        <view class="btn knowBtn left" hover-class="wasTaped" bindtap="{{ isBtnActive? 'setAsKnown':'' }}">
+            <view class="text word-color-{{colorType}}">认识</view>
+            <view class="decorate bg-color-light-{{colorType}}"></view>
+        </view>
+        <view class="btn knowBtn" hover-class="wasTaped" bindtap="{{ isBtnActive? 'setAsUnknown':'' }}">
+            <view class="text notknowtext">不认识</view>
+            <view class="decorate dforNotKnow"></view>
+        </view>
+    </view>
+    <view class="knowWrapper" wx:if="{{ controlMode == 2 }}">
+        <view class="btn knowBtn left" hover-class="wasTaped" bindtap="{{ isBtnActive? 'toNextWord':'' }}">
+            <view class="text word-color-{{colorType}}">下一个</view>
+            <view class="decorate bg-color-light-{{colorType}}"></view>
+        </view>
+        <view class="btn knowBtn" hover-class="wasTaped" bindtap="{{ isBtnActive? 'changeToUnknown':'' }}">
+            <view class="text notknowtext">记错了</view>
+            <view class="decorate dforNotKnow"></view>
+        </view>
+    </view>
+    <view class="btn nextBtn" wx:if="{{ controlMode == 3 }}" hover-class="wasTaped"
+        bindtap="{{ isBtnActive? 'toNextWord':'' }}">
+        <view class="text word-color-{{colorType}}">下一个</view>
+        <view class="decorate bg-color-light-{{colorType}}"></view>
+    </view>
+    <view class="bottomMenu">
+        <!-- <view class="left">单词详情</view>
+        <view class="left">跳过此轮</view>
+        <view class="left">设为已掌握</view>
+        <view class="left last">加入生词本</view> -->
+        <view class="bottomBtn iconfont icon-getDetail" hover-class="wasTaped-bottom" bindtap="toDetail"></view>
+        <view class="bottomBtn iconfont icon-skip" hover-class="wasTaped-bottom" data-type="skip"
+            bindtap="{{ isBtnActive? 'skip':'' }}"></view>
+        <view class="bottomBtn iconfont icon-learned" hover-class="wasTaped-bottom" data-type="master"
+            bindtap="{{ isBtnActive? 'skip':'' }}"></view>
+        <view class="bottomBtn iconfont icon-addToNB-{{isInNotebook?'yes':'no'}}"
+            hover-class="wasTaped-bottom{{isInNotebook?'1':''}}" bindtap="toggleAddToNB"></view>
+    </view>
+</view>
+
+<view class="doneWrapper" wx:if="{{learnDone}}">
+    <view class="text word-color-{{colorType}}">本组单词学习已完成</view>
+    <view class="btn back" hover-class="wasTaped" bindtap="goBack">完成学习</view>
+    <view class="btn continue bg-color-light-{{colorType}}" hover-class="wasTaped" bindtap="reInit">继续学习</view>
+</view>
+
+<!-- <view class="test">
+    <button class="showInfo" data-name="wordLearningRecord" bindtap="showInfo">l-Record</button>
+    <button class="showInfo" data-name="control" bindtap="showInfo">control</button>
+    <button class="showInfo" data-name="settings" bindtap="showInfo">settings</button>
+</view> -->

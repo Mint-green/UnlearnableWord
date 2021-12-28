@@ -1,0 +1,37 @@
+<!--pages/word_list/word_list.wxml-->
+
+<view class="wordWrapper">
+    <view class="wordItem" wx:if="{{todayType == -1}}" wx:for="{{wordList}}" wx:key="index" bindtap="getWordDetail"
+        data-index="{{index}}" hover-class="wasTaped">
+        <view class="dot"></view>
+        <view class="wordInfo">
+            <text class="word">{{item.word}}</text>
+            <text class="trans" space="nbsp" decode="true">&nbsp;&nbsp;&nbsp;&nbsp;{{item.translation}}</text>
+        </view>
+    </view>
+    <view class="tips" wx:if="{{!hasMore && todayType == -1}}">没有更多了哦~</view>
+    <view class="bottom" wx:if="{{hasMore && todayType == -1}}">~</view>
+
+    <view class="changeType" wx:if="{{todayType != -1}}">
+        <view class="type" bindtap="{{ todayType != 0? 'changeType':'' }}">
+            <view class="text {{todayType == 0 ? 'active':''}}">今日学习</view>
+            <view class="decorate" wx:if="{{todayType == 0}}"></view>
+        </view>
+        <view class="type" bindtap="{{ todayType != 1? 'changeType':'' }}">
+            <view class="text {{todayType == 1 ? 'active':''}}">今日复习</view>
+            <view class="decorate" wx:if="{{todayType == 1}}"></view>
+        </view>
+    </view>
+    <view class="forToday" wx:if="{{todayType != -1}}">
+        <view class="wordItem" wx:for="{{todayType == 0? todayLearn : todayReview}}" wx:key="index"
+            bindtap="getWordDetail" data-index="{{index}}" hover-class="wasTaped">
+            <view class="dot"></view>
+            <view class="wordInfo">
+                <text class="word">{{item.word}}</text>
+                <text class="trans" space="nbsp" decode="true">&nbsp;&nbsp;&nbsp;&nbsp;{{item.translation}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="tips" wx:if="{{todayType != -1 && (todayType == 0? !learnHasMore:!reviewHasMore)}}">没有更多了哦~</view>
+    <view class="bottom" wx:if="{{todayType != -1 && (todayType == 0? learnHasMore:reviewHasMore)}}"></view>
+</view>

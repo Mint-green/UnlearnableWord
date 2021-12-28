@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2904327 */
-  src: url('//at.alicdn.com/t/font_2904327_i6ck9fghdif.woff2?t=1636012833391') format('woff2'),
-       url('//at.alicdn.com/t/font_2904327_i6ck9fghdif.woff?t=1636012833391') format('woff'),
-       url('//at.alicdn.com/t/font_2904327_i6ck9fghdif.ttf?t=1636012833391') format('truetype');
+  src: url('//at.alicdn.com/t/font_2904327_t86d9uf5gnr.woff2?t=1639310270426') format('woff2'),
+       url('//at.alicdn.com/t/font_2904327_t86d9uf5gnr.woff?t=1639310270426') format('woff'),
+       url('//at.alicdn.com/t/font_2904327_t86d9uf5gnr.ttf?t=1639310270426') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,50 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-settings:before {
+  content: "\e8b7";
+}
+
+.icon-pwd:before {
+  content: "\e600";
+}
+
+.icon-toDetail:before {
+  content: "\e775";
+}
+
+.icon-camera:before {
+  content: "\e77f";
+}
+
+.icon-settings_old:before {
+  content: "\e892";
+}
+
+.icon-nickname:before {
+  content: "\e608";
+}
+
+.icon-learned:before {
+  content: "\e721";
+}
+
+.icon-addToNB-no:before {
+  content: "\e8b9";
+}
+
+.icon-addToNB-yes:before {
+  content: "\e8c6";
+}
+
+.icon-skip:before {
+  content: "\e622";
+}
+
+.icon-getDetail:before {
+  content: "\e68e";
 }
 
 .icon-cancel:before {

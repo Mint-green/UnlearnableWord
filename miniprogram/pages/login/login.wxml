@@ -1,9 +1,9 @@
 <!--login.wxml-->
-<view class="bgWrapper" style='{{bgStyle}}'></view>
+<view class="bgWrapper" style="{{bgStyle}}"></view>
 
 <view class="wrapper" wx:if="{{!isregister}}">
   <view class="title">登录</view>
-  <input type="text" class="inputField username" placeholder="账号" data-inputtype="username" bindinput="handleInput" confirm-type='next' />
+  <input type="text" class="inputField username" placeholder="账号" data-inputtype="username" bindinput="handleInput" confirm-type='next' bindblur='checkUsernameVaild' />
   <input type="text" class="inputField pwd" password="true" placeholder="密码" data-inputtype="pwd" bindinput="handleInput" confirm-type='done' />
   <view class="btnWrapper registerBtnWrapper">
     <view class="changeBtn registerBtn" bindtap='changeType'>注册</view>
@@ -14,8 +14,8 @@
 
 <view class="wrapper" wx:if="{{isregister}}">
   <view class="title">注册</view>
-  <input type="text" class="inputField username" placeholder="账号" data-inputtype="username" bindinput="handleInput" confirm-type='next' bindblur='checkUsername'/>
-  <input type="text" class="inputField middlePwd" password="true" placeholder="密码" data-inputtype="pwd" bindinput="handleInput" confirm-type='next' />
+  <input type="text" class="inputField username" placeholder="账号" data-inputtype="username" bindinput="handleInput" confirm-type='next' bindblur='checkUsername' />
+  <input type="text" class="inputField middlePwd" password="true" placeholder="密码" data-inputtype="pwd" bindinput="handleInput" confirm-type='next' bindblur='checkPwd' />
   <input type="text" class="inputField pwd" password="true" placeholder="确认密码" data-inputtype="confirm_pwd" bindinput="handleInput" confirm-type='done' bindblur='checkTwoPwd' />
   <view class="btnWrapper">
     <view class="changeBtn loginBtn" bindtap='changeType'>登录</view>

@@ -3,10 +3,396 @@
   height: 100%;
   position: absolute;
   z-index: -100;
+  background-color: #f6f6f6;
 }
-.bgWrapper .bg {
-  margin-left: -15%;
-  margin-top: -15%;
-  width: 130%;
-  height: 130%;
+.progress {
+  margin-top: 100rpx;
+  margin-left: auto;
+  margin-right: auto;
+}
+.resetbtn {
+  margin-top: 100rpx;
+  margin-left: auto;
+  margin-right: auto;
+}
+.eccanvasContainer {
+  width: 95%;
+  height: 500rpx;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #ffffff;
+  border-radius: 20rpx;
+}
+.contentWarpper {
+  width: 675rpx;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20rpx;
+}
+.contentWarpper .contentTitle {
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+  color: #fd6802;
+  font-size: 40rpx;
+  font-weight: 700;
+}
+.contentWarpper .contentCard {
+  margin-top: 20rpx;
+  width: 675rpx;
+  border-radius: 20rpx;
+  box-shadow: 2rpx 2rpx 10rpx rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  overflow: hidden;
+}
+.contentWarpper .contentCard .title {
+  width: 620rpx;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20rpx;
+  font-size: 40rpx;
+  color: #fd6802;
+  font-weight: 700;
+}
+.contentWarpper .contentCard .cardTop {
+  display: flex;
+}
+.contentWarpper .contentCard .cardTop .bookWrapper {
+  width: 265rpx;
+  height: 280rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.contentWarpper .contentCard .cardTop .bookWrapper .book {
+  width: 147rpx;
+  height: 208rpx;
+  background-color: #2586e5;
+  background-color: #6995c2;
+  border-radius: 10rpx;
+}
+.contentWarpper .contentCard .cardTop .bookWrapper .book .name {
+  width: 40rpx;
+  height: 100rpx;
+  font-size: 36rpx;
+  color: #ffffff;
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+  font-weight: 600;
+}
+.contentWarpper .contentCard .cardTop .bookWrapper .tips {
+  position: absolute;
+  bottom: 0rpx;
+  width: 265rpx;
+  height: 20rpx;
+  text-align: center;
+  font-size: 20rpx;
+  font-weight: 600;
+  color: #bfbfbf;
+}
+.contentWarpper .contentCard .cardBottom {
+  width: 600rpx;
+  margin-right: auto;
+  margin-left: auto;
+  height: 70rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.contentWarpper .contentCard .cardBottom .learnProgress {
+  width: 600rpx;
+  height: 20rpx;
+}
+.contentWarpper .contentCard .cardBottom .progressNum {
+  width: 600rpx;
+  display: flex;
+  justify-content: space-between;
+  font-size: 20rpx;
+  font-weight: 600;
+  color: #bfbfbf;
+}
+.contentWarpper .contentCard .dataWrapper {
+  width: 410rpx;
+  height: 240rpx;
+  height: 280rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.contentWarpper .contentCard .dataWrapper .dataItem {
+  width: 170rpx;
+  height: 120rpx;
+  padding-left: 20rpx;
+  margin-right: 10rpx;
+  margin-bottom: 10rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.contentWarpper .contentCard .dataWrapper .dataItem .dataName {
+  height: 30rpx;
+  margin-left: 10rpx;
+  font-size: 24rpx;
+  font-weight: 700;
+  color: #8a8a8a;
+}
+.contentWarpper .contentCard .dataWrapper .dataItem .dataValue {
+  height: 44rpx;
+  margin-top: 10rpx;
+  margin-left: 10rpx;
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #515151;
+  color: #757575;
+}
+.contentWarpper .contentCard .dataWrapper .dataItem .dataValue .unit {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #8a8a8a;
+}
+.contentWarpper .contentCard .dataWrapper .wasTaped {
+  border-radius: 10rpx;
+  background-color: #f6f6f6;
+}
+.contentWarpper .contentCard .forAllData {
+  width: 600rpx;
+  height: 240rpx;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30rpx;
+  margin-top: 10rpx;
+}
+.contentWarpper .contentCard .forAllData .dataItem {
+  width: 240rpx;
+  padding-left: 50rpx;
+}
+.contentWarpper .contentCard .forAllData .dataItem .dataName {
+  position: relative;
+}
+.contentWarpper .contentCard .forAllData .dataItem .dataName .dot {
+  position: absolute;
+  top: 6rpx;
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 10rpx;
+  background-color: #fd6802;
+  left: -40rpx;
+}
+.contentWarpper .contentCard .wordContainer {
+  width: 620rpx;
+  margin-top: 10rpx;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 150rpx;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+.contentWarpper .contentCard .wordContainer .word {
+  margin-right: 10rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  font-size: 28rpx;
+  border-radius: 20rpx;
+  background-color: #f0f0f0;
+  color: #8a8a8a;
+  padding: 0rpx 20rpx;
+  font-weight: 600;
+  margin-top: 10rpx;
+}
+.contentWarpper .contentCard .wordContainer .wasTaped {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.contentWarpper .contentCard .moreBtn {
+  width: 620rpx;
+  height: 80rpx;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
+.contentWarpper .contentCard .moreBtn .btn {
+  width: 200rpx;
+  height: 80rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #757575;
+  border-radius: 10rpx;
+  text-align: center;
+  line-height: 80rpx;
+}
+.contentWarpper .contentCard .moreBtn .wasTaped {
+  background-color: #f6f6f6;
+}
+.contentWarpper .contentCard .bottom {
+  width: 620rpx;
+  height: 20rpx;
+}
+.contentWarpper .contentCard .tips {
+  width: 620rpx;
+  height: 150rpx;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #757575;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+.contentWarpper .contentCard .mpprogressWrapper {
+  width: 600rpx;
+  height: 240rpx;
+  margin-top: 20rpx;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+.contentWarpper .contentCard .mpprogressWrapper .taskProgress {
+  width: 300rpx;
+  height: 240rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.contentWarpper .contentCard .mpprogressWrapper .taskProgress .mpProgress {
+  width: 200rpx;
+  height: 200rpx;
+}
+.contentWarpper .contentCard .mpprogressWrapper .taskProgress .learnData {
+  position: absolute;
+  width: 300rpx;
+  height: 240rpx;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.contentWarpper .contentCard .mpprogressWrapper .taskProgress .learnData .num {
+  font-size: 32rpx;
+  color: #515151;
+  color: #757575;
+}
+.contentWarpper .contentCard .mpprogressWrapper .taskProgress .learnData .workload {
+  font-size: 20rpx;
+  color: #8a8a8a;
+}
+.contentWarpper .contentCard .mpprogressWrapper .taskProgress .learnData .dec {
+  font-size: 20rpx;
+  color: #8a8a8a;
+}
+.contentWarpper .contentCard .forDailySum {
+  width: 600rpx;
+  height: 120rpx;
+  margin-left: auto;
+  margin-right: auto;
+}
+.contentWarpper .contentCard .forDailySum .dataItem {
+  width: 160rpx;
+}
+.contentWarpper .contentCard .forDailySum .dataItem .dataName {
+  font-size: 20rpx;
+  height: 24rpx;
+}
+.contentWarpper .contentCard .forDailySum .dataItem .dataValue {
+  font-size: 36rpx;
+  margin-top: 6rpx;
+  height: 40rpx;
+  color: #ff831e;
+}
+.contentWarpper .contentCard .forDailySum .dataItem .dataValue .unit {
+  font-size: 20rpx;
+}
+.contentWarpper .contentCard .forDailySum .dataItem .date {
+  font-size: 30rpx;
+  color: #757575;
+}
+.bottom {
+  width: 100rpx;
+  height: 100rpx;
+}
+.changeBookWrapper {
+  width: 750rpx;
+  height: 600rpx;
+  margin-top: 50rpx;
+}
+.changeBookWrapper .book {
+  width: 750rpx;
+  height: 160rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 10rpx;
+}
+.changeBookWrapper .book .bookCover {
+  margin-left: 20rpx;
+  margin-right: 40rpx;
+  width: 106rpx;
+  height: 140rpx;
+  background-color: #2586e5;
+  background-color: #6995c2;
+  border-radius: 10rpx;
+}
+.changeBookWrapper .book .bookCover .name {
+  width: 28rpx;
+  height: 100rpx;
+  font-size: 28rpx;
+  color: #ffffff;
+  margin-left: 10rpx;
+  margin-top: 10rpx;
+  font-weight: 600;
+}
+.changeBookWrapper .book .info {
+  width: 70%;
+  height: 160rpx;
+  position: relative;
+  font-weight: 600;
+}
+.changeBookWrapper .book .info .bookName {
+  color: #757575;
+  font-size: 28rpx;
+  margin-top: 10rpx;
+  font-weight: 700;
+}
+.changeBookWrapper .book .info .des {
+  margin-top: 10rpx;
+  font-size: 22rpx;
+  color: #8a8a8a;
+}
+.changeBookWrapper .book .info .total {
+  position: absolute;
+  bottom: 10rpx;
+  font-size: 22rpx;
+  color: #8a8a8a;
+}
+.changeBookWrapper .book .info .total .num {
+  font-size: 26rpx;
+}
+.changeBookWrapper .wasTaped {
+  background-color: rgba(150, 150, 150, 0.1);
+}
+.test {
+  color: #a781e0;
+  color: #f5cec7;
+  color: #c396d3;
+  color: #ffa2ad;
+  color: #46cca4;
+  color: #fd6802;
+  color: #ff831e;
+  color: #87cafe;
+  color: #50b3ff;
+  color: #ffc8cb;
+  color: #fcaaae;
+  color: #bfbfbf;
 }

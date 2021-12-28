@@ -1,2 +1,35 @@
 <!--pages/user/user.wxml-->
-<text>pages/user/user.wxml</text>
+
+<view class="header">
+    <view class="background">
+        <image class="bgImg"
+            src="{{userInfo.avatar_pic || defaultPic}}"
+            mode="scaleToFill" />
+    </view>
+    <view class="loginBtn" hover-class="wasTaped" bindtap="goLogin" wx:if="{{!isLogin}}">登录</view>
+    <image class="avatar" src="{{userInfo.avatar_pic}}" background-size="cover" mode="widthFix" wx:if="{{isLogin}}">
+    </image>
+    <view class="username" wx:if="{{isLogin}}">{{userInfo.username}}</view>
+</view>
+
+<view class="optionList">
+    <view class="option" hover-class="wasTaped" bindtap="notDoneTips">
+        <view class="optionIcon iconfont icon-camera"></view>
+        <view class="optionName">更改头像</view>
+    </view>
+    <view class="option" hover-class="wasTaped" bindtap="notDoneTips">
+        <view class="optionIcon iconfont icon-nickname"></view>
+        <view class="optionName">更改昵称</view>
+    </view>
+    <view class="option" hover-class="wasTaped" wx:if="{{!userInfo.wx_user}}" bindtap="notDoneTips">
+        <view class="optionIcon iconfont icon-pwd"></view>
+        <view class="optionName">修改密码</view>
+    </view>
+    <view class="split"></view>
+    <view class="option" hover-class="wasTaped" bindtap="goSettings">
+        <view class="optionIcon iconfont icon-settings"></view>
+        <view class="optionName">更多设置</view>
+        <view class="more iconfont icon-toDetail"></view>
+    </view>
+</view>
+<view class="logoutBtn" hover-class="wasTaped" bindtap="logout" wx:if="{{isLogin}}">退出登录</view>

@@ -1,0 +1,405 @@
+.bgWrapper {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: -100;
+    // background-image: linear-gradient(to bottom, #ffb284, #FFFFFF);
+}
+
+.topline {
+    width: 100%;
+    height: 60rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .progress {
+        font-size: 32rpx;
+        color: #f6f6f6;
+    }
+}
+
+.wordWrapper {
+    margin-top: 30rpx;
+    width: 100%;
+    height: 500rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+
+    .word {
+        font-size: 75rpx;
+        font-weight: 700;
+        // color: #ffffff;
+        margin-bottom: 10rpx;
+    }
+
+    .repeatTime {
+        margin-bottom: 20rpx;
+        width: 150rpx;
+        height: 16rpx;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .times {
+            width: 20rpx;
+            height: 10rpx;
+            border-radius: 5rpx;
+            margin-left: 16rpx;
+            box-shadow: 2rpx 2rpx 4rpx rgba(0, 0, 0, 0.1);
+        }
+
+        .first {
+            margin-left: 0rpx;
+        }
+
+        .bg {
+            background-color: #ffffff;
+        }
+    }
+
+    .pron {
+        font-size: 34rpx;
+        font-family: Arial, Helvetica, sans-serif;
+        // font-weight: 700;
+        color: #ffffff;
+    }
+
+    .timing {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        .progress {
+            width: 100rpx;
+            height: 100rpx;
+        }
+
+        .resetbtn {
+            margin-top: 20rpx;
+        }
+
+        .model {
+            width: 300rpx;
+            height: 70rpx;
+            opacity: 0.3;
+            border-radius: 16rpx;
+            box-shadow: 2rpx 2rpx 15rpx rgba(0, 0, 0, 0.1), -2rpx -2rpx 15rpx rgba(0, 0, 0, 0.1);
+            background-image: linear-gradient(to right, #cdcdcd, #ffffff);
+        }
+
+        .phonetic {
+            margin-top: 20rpx;
+            width: 150rpx;
+            height: 50rpx;
+            border-radius: 10rpx;
+        }
+    }
+}
+
+.content {
+    // margin-top: 50rpx;
+    position: absolute;
+    bottom: 260rpx;
+    width: 100%;
+    height: 650rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+
+    .chooseCorrect {
+        // width: 100%;
+
+        .choice {
+            margin-bottom: 15rpx;
+            display: flex;
+            // align-items: flex-end;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 30rpx;
+            height: 135rpx;
+            width: 670rpx;
+            border-radius: 15rpx;
+            box-shadow: 2rpx 2rpx 5rpx rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.5);
+
+            .pos {
+                font-size: 24rpx;
+                line-height: 30rpx;
+                font-weight: 600;
+                color: #a0a0a0;
+                min-width: 36rpx;
+                margin-right: 10rpx
+            }
+
+            .meaning {
+                font-size: 32rpx;
+                line-height: 40rpx;
+                font-weight: 600;
+                color: #757575;
+                // height: 40rpx;
+            }
+        }
+
+        .rightChoice {
+            // background-color: #a8e7ca;
+            background-color: rgb(177, 223, 201);
+        }
+
+        .falseChoice {
+            background-color: #fdbaba;
+        }
+
+        .wasTaped {
+            background-color: rgba(150, 150, 150, 0.4);
+        }
+    }
+
+    .translationWrapper {
+        max-width: 85%;
+
+        .transRow {
+            margin-bottom: 20rpx;
+            display: flex;
+            align-items: flex-end;
+            // height: 42rpx;
+
+            .pos {
+                font-size: 28rpx;
+                line-height: 30rpx;
+                font-weight: 600;
+                color: #a0a0a0;
+                min-width: 36rpx;
+                margin-right: 10rpx
+            }
+
+            .meaning {
+                font-size: 36rpx;
+                line-height: 40rpx;
+                font-weight: 600;
+                color: #757575;
+                // height: 40rpx;
+            }
+
+            .moreBtn {
+                width: 150rpx;
+                text-align: center;
+                font-size: 28rpx;
+                color: #a0a0a0;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .tapedText {
+                color: #757575;
+            }
+        }
+    }
+
+    .timing {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        .progress {
+            width: 100rpx;
+            height: 100rpx;
+        }
+
+        .resetbtn {
+            margin-top: 20rpx;
+        }
+
+        .model {
+            width: 350rpx;
+            height: 50rpx;
+            margin-bottom: 20rpx;
+            border-radius: 10rpx;
+            box-shadow: 2rpx 2rpx 15rpx rgba(0, 0, 0, 0.1), -2rpx -2rpx 15rpx rgba(0, 0, 0, 0.1);
+            background-image: linear-gradient(to right, #cdcdcd, #ffffff);
+            opacity: 0.3;
+        }
+    }
+}
+
+.control {
+    position: absolute;
+    bottom: 20rpx;
+    width: 100%;
+    height: 230rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .btn {
+        height: 120rpx;
+        border-radius: 15rpx;
+        font-weight: 700;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .text {
+            font-size: 34rpx;
+        }
+
+        .decorate {
+            margin-top: 10rpx;
+            width: 30rpx;
+            height: 10rpx;
+            border-radius: 5rpx;
+        }
+    }
+
+    .knowWrapper {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .knowBtn {
+            width: 330rpx;
+
+            .notknowtext {
+                color: #a0a0a0;
+            }
+
+            .dforNotKnow {
+                background-color: #cdcdcd;
+            }
+        }
+
+        .left {
+            margin-right: 30rpx;
+        }
+    }
+
+    .wasTaped {
+        background-color: rgba(150, 150, 150, 0.1);
+    }
+
+    .answerBtn {
+        width: 700rpx;
+
+        .text {
+            color: #a0a0a0;
+        }
+
+        .decorate {
+            background-color: #cdcdcd;
+        }
+    }
+
+    .nextBtn {
+        width: 700rpx;
+    }
+
+    .bottomMenu {
+        height: 80rpx;
+        width: 100%;
+        margin-top: 40rpx;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        .bottomBtn {
+            width: 100rpx;
+            height: 70rpx;
+            font-size: 46rpx;
+            font-weight: 600;
+            color: #cdcdcd;
+            // border-radius: 10rpx;
+            // background-color: rgba(150, 150, 150, 0.1);
+            line-height: 70rpx;
+            text-align: center;
+        }
+
+        .icon-addToNB-yes {
+            color: #fb6a00;
+        }
+
+        .wasTaped-bottom {
+            color: #a0a0a0;
+        }
+
+        .wasTaped-bottom1 {
+            filter: grayscale(20%);
+        }
+    }
+}
+
+.doneWrapper {
+    width: 750rpx;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 10;
+
+    .text {
+        font-size: 50rpx;
+        font-weight: 700;
+        margin-top: -100rpx;
+        margin-bottom: 100rpx;
+    }
+
+    .btn {
+        width: 300rpx;
+        height: 80rpx;
+        line-height: 80rpx;
+        text-align: center;
+        border-radius: 10rpx;
+        border-radius: 40rpx;
+        font-weight: 600;
+        margin-bottom: 50rpx;
+        font-size: 32rpx;
+    }
+
+    .back {
+        background-color: rgba(150, 150, 150, 0.4);
+        color: #a0a0a0;
+        color: #ffffff;
+    }
+
+    .continue {
+        color: #ffffff;
+    }
+
+    .wasTaped {
+        opacity: 0.6;
+    }
+}
+
+.test {
+    position: absolute;
+    top: 50rpx;
+    right: 20rpx;
+    display: flex;
+
+    .showInfo {
+        width: 150rpx;
+        font-size: 28rpx;
+        height: 36rpx;
+        border-radius: 6rpx;
+        background-color: #f6f6f6;
+        padding: 0;
+        margin-right: 20rpx;
+    }
+}

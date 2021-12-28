@@ -3,7 +3,7 @@
 <view class="searchWrapper">
     <view class="searchIcon iconfont icon-search"></view>
     <input type="text" class="search" value="{{searchWords}}" always-embed="{{true}}" placeholder="请输入想查询的单词"
-    placeholder-class="placeHolder" focus="{{focus}}" bindinput="handleInput" />
+        placeholder-class="placeHolder" focus="{{focus}}" bindinput="handleInput" />
 </view>
 <view class="cancelWrapper" wx:if="{{keyword!=''}}" catchtap="clearInput">
     <view class="cancel">
@@ -23,6 +23,9 @@
         <text class="word">{{item.word}}</text>
         <text class="trans" space="nbsp" decode="true">&nbsp;&nbsp;&nbsp;&nbsp;{{item.translation}}</text>
     </view>
+</view>
+<view class="resultTips" wx:if="{{haveResult}}">
+    <view class="text" wx:if="{{!hasMore}}">没有更多结果了哦</view>
 </view>
 
 <scroll-view class="historyWrapper" wx:if="{{history.length != 0 && !haveResult}}">

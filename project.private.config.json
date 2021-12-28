@@ -1,36 +1,72 @@
 {
-  "setting": {},
-  "condition": {
-    "plugin": {
-      "list": []
-    },
-    "game": {
-      "list": []
-    },
-    "gamePlugin": {
-      "list": []
-    },
-    "miniprogram": {
-      "list": [
-        {
-            "name": "pages/search/search",
-            "pathName": "pages/search/search",
-            "query": "",
-            "scene": null
+    "setting": {},
+    "condition": {
+        "plugin": {
+            "list": []
         },
-        {
-            "name": "pages/word_detail/word_detail",
-            "pathName": "pages/word_detail/word_detail",
-            "query": "word_id=1630",
-            "scene": null
+        "game": {
+            "list": []
         },
-        {
-            "name": "pages/login/login",
-            "pathName": "pages/login/login",
-            "query": "",
-            "scene": null
+        "gamePlugin": {
+            "list": []
+        },
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "pages/search/search",
+                    "pathName": "pages/search/search",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/word_detail/word_detail",
+                    "pathName": "pages/word_detail/word_detail",
+                    "query": "word_id=1630",
+                    "scene": null
+                },
+                {
+                    "name": "pages/login/login",
+                    "pathName": "pages/login/login",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/learning/learning",
+                    "pathName": "pages/learning/learning",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/overview/overview",
+                    "pathName": "pages/overview/overview",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/review/review",
+                    "pathName": "pages/review/review",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/word_list/word_list",
+                    "pathName": "pages/word_list/word_list",
+                    "query": "type=getBkLearnedWord",
+                    "scene": null
+                },
+                {
+                    "name": "pages/user/user",
+                    "pathName": "pages/user/user",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/user_settings/user_settings",
+                    "pathName": "pages/user_settings/user_settings",
+                    "query": "",
+                    "scene": null
+                }
+            ]
         }
-    ]
     }
-  }
 }

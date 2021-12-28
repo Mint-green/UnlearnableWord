@@ -77,6 +77,57 @@ const wxLogin = (data) => {
     })
 }
 
+const changeWordBook = (data) => {
+    // let data = {}
+    data.$url = 'changeWordBook'
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "userRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
+
+const changeSettings = (data) => {
+    // let data = {}
+    data.$url = 'changeSettings'
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "userRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
+
+const getUserInfoViaId = (data) => {
+    // let data = {}
+    data.$url = 'getUserInfoViaId'
+    return new Promise((resolve, reject) => {
+        wx.cloud.callFunction({
+            name: "userRouter",
+            data,
+            success: (res) => {
+                resolve(res.result)
+            },
+            fail: (err) => {
+                reject(err)
+            }
+        })
+    })
+}
+
 
 module.exports = {
     checkUsernameInDB: checkUsernameInDB,
@@ -84,4 +135,7 @@ module.exports = {
     login: login,
     getWxUserInfo: getWxUserInfo,
     wxLogin: wxLogin,
+    changeWordBook: changeWordBook,
+    changeSettings: changeSettings,
+    getUserInfoViaId: getUserInfoViaId,
 }

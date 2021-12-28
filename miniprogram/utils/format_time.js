@@ -21,12 +21,21 @@ const formatDate = (time) => {
     return dateStr
 }
 
+const getDayZeroTime = (time = new Date().getTime()) => {
+    var date = new Date(time)
+    date.setMilliseconds(0)
+    date.setSeconds(0)
+    date.setMinutes(0)
+    date.setHours(0)
+    return date.getTime()
+}
+
 const dateNum = (time) => {
     var date = new Date(time)
     var y = date.getFullYear()
     var m = date.getMonth() + 1
     var d = date.getDate()
-    var num = y *10000 + m*100 + d
+    var num = y * 10000 + m * 100 + d
     return num
 }
 
@@ -42,4 +51,5 @@ module.exports = {
     formatTime: formatTime,
     formatDate: formatDate,
     dateNum: dateNum,
+    getDayZeroTime: getDayZeroTime,
 }
