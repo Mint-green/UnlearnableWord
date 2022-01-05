@@ -64,16 +64,16 @@
 
 
 
-<img src="images/before_login_index.jpg" width="19%" alt="首页登录前">  <img src="images/before_login_user.jpg" width="19%" alt="个人页登录前">  <img src="images/login.jpg" width="19%" alt="登录页">  <img src="images/after_login_index.jpg" width="19%" alt="首页登录后">  <img src="images/after_login_user.jpg" width="19%" alt="个人页登录后">
+<img src="images/before_login_index.jpg" width="19%" alt="首页登录前">&nbsp;&nbsp;<img src="images/before_login_user.jpg" width="19%" alt="个人页登录前">&nbsp;&nbsp;<img src="images/login.jpg" width="19%" alt="登录页">&nbsp;&nbsp;<img src="images/after_login_index.jpg" width="19%" alt="首页登录后">&nbsp;&nbsp;<img src="images/after_login_user.jpg" width="19%" alt="个人页登录后">
 <img src="images/title_1.png"  width="100%" alt="图名1">
 
-<img src="images/after_login_overview_1.jpg" width="19%" alt="概览页登录后1">  <img src="images/after_login_overview_2.jpg" width="19%" alt="概览页登录后2">  <img src="images/word_list.jpg" width="19%" alt="单词列表">  <img src="images/learning_1.jpg" width="19%" alt="学习/复习页1">  <img src="images/learning_3.jpg" width="19%" alt="学习/复习页2">
+<img src="images/after_login_overview_1.jpg" width="19%" alt="概览页登录后1">&nbsp;&nbsp;<img src="images/after_login_overview_2.jpg" width="19%" alt="概览页登录后2">&nbsp;&nbsp;<img src="images/word_list.jpg" width="19%" alt="单词列表">&nbsp;&nbsp;<img src="images/learning_1.jpg" width="19%" alt="学习/复习页1">&nbsp;&nbsp;<img src="images/learning_3.jpg" width="19%" alt="学习/复习页2">
 <img src="images/title_2.png"  width="100%" alt="图名2">
 
-<img src="images/learning_4.jpg" width="19%" alt="学习/复习页3">  <img src="images/learning_5.jpg" width="19%" alt="学习/复习页4">  <img src="images/learning_6.jpg" width="19%" alt="学习/复习页5">  <img src="images/learning_8.jpg" width="19%" alt="学习/复习页6">  <img src="images/search_1.jpg" width="19%" alt="搜索页">
+<img src="images/learning_4.jpg" width="19%" alt="学习/复习页3">&nbsp;&nbsp;<img src="images/learning_5.jpg" width="19%" alt="学习/复习页4">&nbsp;&nbsp;<img src="images/learning_6.jpg" width="19%" alt="学习/复习页5">&nbsp;&nbsp;<img src="images/learning_8.jpg" width="19%" alt="学习/复习页6">&nbsp;&nbsp;<img src="images/search_1.jpg" width="19%" alt="搜索页">
 <img src="images/title_3.png"  width="100%" alt="图名3">
 
-<img src="images/search_word_small.jpg" width="19%" alt="小词库搜索">  <img src="images/search_word_big.jpg" width="19%" alt="大词库搜索">  <img src="images/search_translation.jpg" width="19%" alt="释义搜索">  <img src="images/word_detail.jpg" width="19%" alt="单词详情">  <img src="images/settings.jpg" width="19%" alt="设置页">
+<img src="images/search_word_small.jpg" width="19%" alt="小词库搜索">&nbsp;&nbsp;<img src="images/search_word_big.jpg" width="19%" alt="大词库搜索">&nbsp;&nbsp;<img src="images/search_translation.jpg" width="19%" alt="释义搜索">&nbsp;&nbsp;<img src="images/word_detail.jpg" width="19%" alt="单词详情">&nbsp;&nbsp;<img src="images/settings.jpg" width="19%" alt="设置页">
 <img src="images/title_4.png"  width="100%" alt="图名4">
 
 
