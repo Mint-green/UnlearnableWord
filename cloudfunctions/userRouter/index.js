@@ -168,7 +168,7 @@ exports.main = async (event, context) => {
                 userinfo.c_time = time.toISOString()
                 userinfo.last_login = userinfo.c_time
                 userinfo.l_book_id = -1
-                userinfo.settings = { auto_update_avatar: ture }
+                userinfo.settings = { auto_update_avatar: true, auto_update_username: true }
                 userinfo.open_id = open_id
                 userinfo.wx_user = true
                 userinfo.avatar_pic = event.avatar_pic
@@ -216,8 +216,11 @@ exports.main = async (event, context) => {
                     data.avatar_pic = event.avatar_pic
                     res1.data[0].avatar_pic = event.avatar_pic
                 }
+                if (res1.data[0].settings.auto_update_username) {
+                    data.username = event.username
+                    res1.data[0].username = event.username
+                }
                 let res2 = await learnerDB.where({
-                    username: username,
                     open_id: open_id
                 }).update({
                     data
@@ -297,20 +300,63 @@ exports.main = async (event, context) => {
         let value = event.value
         let validRange = ['username', 'avatar_pic', 'l_book_id', 'settings']
 
-        if (validRange.indexOf(fieldName) == -1) {
-            ctx.body = { ...rescontent.DATAERR }
-            return
-        }
 
         try {
             let updateData = {}
-            updateData[fieldName] = value
+            if (typeof (fieldName) == 'string') {
+                if (validRange.indexOf(fieldName) == -1) {
+                    ctx.body = { ...rescontent.DATAERR }
+                    return
+                }
+                updateData[fieldName] = value
+            } else if (typeof (fieldName) == 'object' && typeof (fieldName[0]) == 'string') {
+                for (let i = 0; i < fieldName.length; i++) {
+                    if (validRange.indexOf(fieldName[i]) == -1) {
+                        ctx.body = { ...rescontent.DATAERR }
+                        return
+                    }
+                    updateData[fieldName[i]] = value[i]
+                }
+            } else {
+                ctx.body = { ...rescontent.DATAERR }
+                return
+            }
             let res = await db.collection('learner')
                 .where({
                     user_id
                 })
                 .update({
                     data: updateData
+                })
+
+            console.log(res)
+            let data = false
+            if (res.stats.updated == 1) {
+                data = true
+            }
+
+            ctx.body = { ...rescontent.SUCCESS, data: data }
+        } catch (e) { // 抛出错误
+            console.error(e)
+            ctx.body = { ...rescontent.DBERR, err: e }
+        }
+    })
+
+    app.router('changePwd', async (ctx, next) => {
+        let user_id = event.user_id
+        let oldPwd = event.oldPwd
+        let newPwd = event.newPwd
+
+        try {
+            let res = await db.collection('learner')
+                .where({
+                    user_id,
+                    pwd: oldPwd,
+                })
+                .update({
+                    data: {
+                        pwd: newPwd
+                    }
                 })
 
             console.log(res)

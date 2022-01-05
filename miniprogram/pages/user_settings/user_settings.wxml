@@ -1,6 +1,24 @@
 <!--pages/user_settings/user_settings.wxml-->
 
 <view class="optionList">
+    <view class="option" wx:if="{{wx_user}}">
+        <view class="optionName">自动更新微信头像</view>
+        <view class="optionValue">
+            <switch class="switch" checked="{{switchSettings.auto_update_avatar}}" data-type="auto_update_avatar"
+                bindchange="switchChange">
+            </switch>
+        </view>
+    </view>
+    <view class="option" wx:if="{{wx_user}}">
+        <view class="optionName">自动更新微信昵称</view>
+        <view class="optionValue">
+            <switch class="switch" checked="{{switchSettings.auto_update_username}}" data-type="auto_update_username"
+                bindchange="switchChange">
+            </switch>
+        </view>
+    </view>
+
+    <view class="split" wx:if="{{wx_user}}"></view>
     <!-- 倒计时与否-->
     <view class="option">
         <view class="optionName">遮挡单词或释义时倒计时</view>

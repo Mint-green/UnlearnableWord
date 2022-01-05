@@ -296,6 +296,11 @@ Page({
                         this.getBasicLearningData()
                     }
                     app.globalData.updatedForIndex = false
+                } else {
+                    this.setData({
+                        needToLearn: 0,
+                        needToReview: 0,
+                    })
                 }
             }
             if (app.globalData.updatedForIndex) {

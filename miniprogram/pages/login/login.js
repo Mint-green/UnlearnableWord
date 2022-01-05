@@ -57,9 +57,9 @@ Page({
         let username = this.user.username
         if (username == '') { return false }
         if(!(this.checkUsernameVaild()))  return false
-        console.log('check whether', username, 'have been registered')
+        // console.log('check whether', username, 'have been registered')
         let res = await userApi.checkUsernameInDB({ username })
-        console.log('checkUsername', res)
+        // console.log('checkUsername', res)
         if (!res.errorcode) { return false }
         if (res.data.isFind) {
             this.setErrType(3)

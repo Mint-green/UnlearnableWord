@@ -111,11 +111,11 @@
 <view class="doneWrapper" wx:if="{{reviewDone}}">
     <view class="text word-color-{{colorType}}">本组单词复习已完成</view>
     <view class="decorate bg-color-light-{{colorType}}"></view>
+    <view class="title content-title-color-{{colorType}}">
+        <view class="word">单词</view>
+        <view class="interval">下次学习时间</view>
+    </view>
     <scroll-view class="reviewResWrapper" scroll-y="{{true}}">
-        <view class="item title content-title-color-{{colorType}}">
-            <view class="word">单词</view>
-            <view class="interval">下次学习时间</view>
-        </view>
         <view class="item words" wx:for="{{reviewRes}}" wx:key="index">
             <view class="word">{{item.word}}</view>
             <view class="interval" wx:if="{{item.success && !item.master}}">{{item.NOI}}天后</view>

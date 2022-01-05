@@ -9,6 +9,7 @@
         "pages/learning/learning",
         "pages/review/review",
         "pages/word_list/word_list",
+        "pages/image_cropper/image_cropper",
         "pages/user_settings/user_settings"
     ],
     "window": {

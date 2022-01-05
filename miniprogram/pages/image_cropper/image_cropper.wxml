@@ -1,0 +1,14 @@
+<!--pages/image_cropper/image_cropper.wxml-->
+<view style="width:100%;height:500rpx;">
+    <image-cropper id="image-cropper" bindload="cropperload" bindimageload="loadimage" bindtapcut="clickcut"
+        limit_move="{{true}}" disable_rotate="{{true}}" width="{{width}}" height="{{height}}"
+        imgSrc="{{src}}" angle="{{angle}}" disable_width="{{false}}" max_width="{{max_width}}"
+        max_height="{{max_height}}" disable_height="{{false}}" disable_ratio="{{true}}">
+    </image-cropper>
+</view>
+<text class="hint">点击中间裁剪框可查看裁剪后的图片</text>
+<view class='bottom'>
+    <view class="btnText" bindtap='chooseImage'>更换</view>
+    <view class="iconfont icon-rotate btnText" bindtap='rotate'></view>
+    <button type="primary" class="button" bindtap='submit'>确定</button>
+</view>

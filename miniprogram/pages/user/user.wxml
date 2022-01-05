@@ -2,26 +2,24 @@
 
 <view class="header">
     <view class="background">
-        <image class="bgImg"
-            src="{{userInfo.avatar_pic || defaultPic}}"
-            mode="scaleToFill" />
+        <image class="bgImg" src="{{userInfo.avatar_pic || defaultPic}}" mode="scaleToFill" />
     </view>
     <view class="loginBtn" hover-class="wasTaped" bindtap="goLogin" wx:if="{{!isLogin}}">登录</view>
-    <image class="avatar" src="{{userInfo.avatar_pic}}" background-size="cover" mode="widthFix" wx:if="{{isLogin}}">
+    <image class="avatar" src="{{userInfo.avatar_pic}}" bindtap="previewAvatar" background-size="cover" mode="widthFix" wx:if="{{isLogin}}">
     </image>
     <view class="username" wx:if="{{isLogin}}">{{userInfo.username}}</view>
 </view>
 
 <view class="optionList">
-    <view class="option" hover-class="wasTaped" bindtap="notDoneTips">
+    <view class="option" hover-class="wasTaped" bindtap="changeAvatar">
         <view class="optionIcon iconfont icon-camera"></view>
         <view class="optionName">更改头像</view>
     </view>
-    <view class="option" hover-class="wasTaped" bindtap="notDoneTips">
+    <view class="option" hover-class="wasTaped" data-type="username" bindtap="modify">
         <view class="optionIcon iconfont icon-nickname"></view>
         <view class="optionName">更改昵称</view>
     </view>
-    <view class="option" hover-class="wasTaped" wx:if="{{!userInfo.wx_user}}" bindtap="notDoneTips">
+    <view class="option" hover-class="wasTaped" data-type="pwd" wx:if="{{!userInfo.wx_user}}" bindtap="modify">
         <view class="optionIcon iconfont icon-pwd"></view>
         <view class="optionName">修改密码</view>
     </view>
@@ -33,3 +31,20 @@
     </view>
 </view>
 <view class="logoutBtn" hover-class="wasTaped" bindtap="logout" wx:if="{{isLogin}}">退出登录</view>
+
+<page-container show="{{changeType > -1}}" duration="{{500}}" overlay="{{true}}" position="bottom" round="{{true}}"
+    bind:afterleave="pageleave" bind:enter="onEnter" bind:clickoverlay='cancelModify'>
+    <view class="customizeWrapper">
+        <input type="text" class="customValue" wx:if="{{changeType == 0}}" value="{{inputValue.username}}" always-embed="{{true}}"
+            placeholder="新用户名" placeholder-class="placeHolder" focus="{{focus}}" data-inputtype='username' bindinput="handleInput"
+            confirm-type="done" bindconfirm="onConfirmInput" />
+        <input type="password" class="customValue" wx:if="{{changeType == 1}}" value="{{inputValue.oldPwd}}" always-embed="{{true}}"
+            placeholder="旧密码" placeholder-class="placeHolder" focus="{{focus}}" data-inputtype='oldPwd' bindinput="handleInput"
+            confirm-type="done" bindconfirm="onConfirmInput" />
+        <input type="password" class="customValue" wx:if="{{changeType == 1}}" value="{{inputValue.newPwd}}" always-embed="{{true}}"
+            placeholder="新密码" placeholder-class="placeHolder" data-inputtype='newPwd' bindinput="handleInput"
+            confirm-type="done" bindconfirm="onConfirmInput" />
+        <view class="errMsg">{{errMsg}}</view>
+        <view class="btn" hover-class="wasTaped" bindtap="confirmModify">确认</view>
+    </view>
+</page-container>

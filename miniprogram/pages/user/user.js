@@ -2,6 +2,22 @@
 import regeneratorRuntime, { async } from '../../lib/runtime/runtime';
 
 const app = getApp()
+const modifyDict = {
+    username: 0,
+    pwd: 1,
+}
+const error_message = {
+    empty: '请完成填写再重试',
+    usernameUsed: '该账号已被注册',
+    usernameInvalid1: '用户名仅能包含数字、中英文和下划线',
+    usernameInvalid2: '用户名不能以下划线开头或结尾',
+    pwdInvalid1: '密码仅能包含数字、英文字母和下划线',
+    pwdInvalid2: '密码不能以下划线开头或结尾',
+    pwdErr1: '所输入新密码与旧密码相同',
+    pwdErr2: '旧密码错误',
+
+}
+const userApi = require("../../utils/userApi.js")
 
 Page({
 
@@ -12,10 +28,14 @@ Page({
         isLogin: false,
         userInfo: {},
         defaultPic: 'cloud://music-cloud-1v7x1.6d75-music-cloud-1v7x1-1302160851/avatar_pic/default_1.jpg',
+        changeType: -1,
+        inputValue: {},
+        errMsg: '',
     },
     control: {
         loginTimer: -1,
         pageHide: false,
+        timer: -1,
     },
 
     /**
@@ -115,35 +135,209 @@ Page({
         })
     },
 
-    uploadImg() {
-        wx.showLoading({
-            title: '',
+    previewAvatar() {
+        wx.previewImage({
+            current: this.data.userInfo.avatar_pic, // 当前显示图片的http链接
+            urls: [this.data.userInfo.avatar_pic] // 需要预览的图片http链接列表
         })
-        // 让用户选择一张图片
+    },
+
+    changeAvatar() {
+        if (!this.checkLogin()) return
         wx.chooseImage({
             count: 1,
-            success: chooseResult => {
-                // 将图片上传至云存储空间
-                wx.cloud.uploadFile({
-                    // 指定上传到的云路径
-                    cloudPath: 'my-photo.png',
-                    // 指定要上传的文件的小程序临时文件路径
-                    filePath: chooseResult.tempFilePaths[0],
-                    config: {
-                        env: this.data.envId
-                    }
-                }).then(res => {
-                    console.log('上传成功', res)
-                    this.setData({
-                        haveGetImgSrc: true,
-                        imgSrc: res.fileID
-                    })
-                    wx.hideLoading()
-                }).catch((e) => {
-                    console.log(e)
-                    wx.hideLoading()
+            sizeType: ['compressed'],
+            sourceType: ['album', 'camera'],
+            success(res) {
+                // tempFilePath可以作为img标签的src属性显示图片
+                //   const tempFilePaths = res.tempFilePaths
+                console.log(res)
+                const tempFilePaths = res.tempFilePaths[0]
+                app.globalData.forChangeAvatar.tempImgSrc = tempFilePaths
+                wx.navigateTo({
+                    url: '../image_cropper/image_cropper',
                 })
+            }
+        })
+    },
+
+    modify(e) {
+        if (!this.checkLogin()) return
+        let type = e.currentTarget.dataset.type
+        this.setData({
+            changeType: modifyDict[type],
+            inputValue: {
+                username: '',
+                oldPwd: '',
+                newPwd: '',
             },
+            errMsg: '',
+        })
+
+        let _this = this
+        setTimeout(function () {
+            _this.setData({
+                focus: true
+            })
+        }, 500)
+    },
+
+    handleInput(e) {
+        console.log('event', e)
+        let value = e.detail.value
+        let inputType = e.currentTarget.dataset.inputtype
+        console.log('inputType', inputType)
+        let inputValue = this.data.inputValue
+        inputValue[inputType] = value
+        this.setData({
+            inputValue
+        })
+    },
+
+    setErrType(errtype) {
+        let _this = this
+        this.setData({ errMsg: error_message[errtype] })
+        clearTimeout(this.control.timer)
+        this.control.timer = setTimeout(() => {
+            _this.setData({ errMsg: '' })
+        }, 2000)
+    },
+
+    async changeUsername() {
+        // 用户名合法性判断，只能包含字母、数字、中文、下划线且不能以下划线开头或结尾
+        // let exp1 = /^(?!_)(?!.*?_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$/
+        let username = this.data.inputValue.username
+        if (username == '') {
+            this.setErrType('empty')
+            return false
+        }
+        let exp1 = /^[a-zA-Z0-9_\u4e00-\u9fa5]+$/
+        let exp2 = /^(?!_)(?!.*?_$).+$/
+        if (!exp1.test(username)) {
+            this.setErrType('usernameInvalid1')
+            return false
+        }
+        if (!exp2.test(username)) {
+            this.setErrType('usernameInvalid2')
+            return false
+        }
+
+        let msg = '用户名更改成功~'
+        if (username == this.data.userInfo.username) {
+            msg = '与原用户名相同，无需更改'
+        } else {
+            let res1 = await userApi.checkUsernameInDB({ username })
+            if (!res1.errorcode) { return false }
+            if (res1.data.isFind) {
+                this.setErrType('usernameUsed')
+                return false
+            }
+
+            let data = {
+                user_id: this.data.userInfo.user_id,
+            }
+            if (app.globalData.userInfo.wx_user == true && app.globalData.userInfo.settings.auto_update_username == true) {
+                data.type = ['username', 'settings']
+                data.value = [username, { auto_update_username: false }]
+            } else {
+                data.type = 'username'
+                data.value = username
+            }
+
+            let res2 = await userApi.changeUserInfo(data)
+            if (res2.data == true) {
+                this.setData({
+                    'userInfo.username': username
+                })
+                app.globalData.userInfo.username = username
+                if (app.globalData.userInfo.wx_user == true && app.globalData.userInfo.settings.auto_update_username == true) {
+                    app.globalData.userInfo.settings.auto_update_username = false
+                }
+            } else {
+                wx.showToast({
+                    title: '更改出错，请重试',
+                    icon: 'none',
+                    duration: 1500,
+                })
+                return false
+            }
+        }
+        wx.showToast({
+            title: msg,
+            icon: 'none',
+            duration: 1500,
+        })
+        return true
+    },
+
+    async changePwd() {
+        // 密码合法性判断，只能包含字母、数字、下划线且不能以下划线开头或结尾
+        let oldPwd = this.data.inputValue.oldPwd
+        let newPwd = this.data.inputValue.newPwd
+        if (oldPwd == '' || newPwd == '') {
+            this.setErrType('empty')
+            return false
+        }
+        let exp1 = /^[a-zA-Z0-9_]+$/
+        let exp2 = /^(?!_)(?!.*?_$).+$/
+        if (!exp1.test(oldPwd) || !exp1.test(newPwd)) {
+            this.setErrType('pwdInvalid1')
+            return false
+        }
+        if (!exp2.test(newPwd) || !exp2.test(newPwd)) {
+            this.setErrType('pwdInvalid2')
+            return false
+        }
+
+        if (newPwd == oldPwd) {
+            this.setErrType('pwdErr1')
+            return false
+        } else {
+            let res = await userApi.changePwd({
+                user_id: this.data.userInfo.user_id,
+                oldPwd,
+                newPwd,
+            })
+            if (res.data != true) {
+                this.setErrType('pwdErr2')
+                return false
+            }
+            wx.showToast({
+                title: '密码修改成功~',
+                icon: 'none',
+                duration: 1500,
+            })
+            return true
+        }
+    },
+
+    async confirmModify() {
+        let changeType = this.data.changeType
+        if (changeType == modifyDict['username']) {
+            let success = await this.changeUsername()
+            if (!success) return
+        } else if ((changeType == modifyDict['pwd'])) {
+            let success = await this.changePwd()
+            if (!success) return
+        }
+        this.setData({
+            changeType: -1,
+        })
+    },
+
+    cancelModify() {
+        this.setData({
+            changeType: -1,
+        })
+    },
+
+    // 为拥有进入过渡动画用，实际可不做处理
+    onEnter() { },
+
+    pageleave(e) {
+        console.log('pageleave', e)
+        this.setData({
+            changeType: -1,
         })
     },
 
@@ -175,6 +369,17 @@ Page({
                     isLogin: app.globalData.isLogin,
                     userInfo
                 })
+            }
+
+            if (app.globalData.forChangeAvatar.change) {
+                this.setData({
+                    'userInfo.avatar_pic': app.globalData.forChangeAvatar.imgSrc
+                })
+                app.globalData.forChangeAvatar = {
+                    change: false,
+                    tempImgSrc: '',
+                    imgSrc: '',
+                }
             }
             this.control.pageHide = false
         }

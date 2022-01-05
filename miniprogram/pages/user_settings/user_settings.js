@@ -56,9 +56,15 @@ Page({
     init() {
         let settings = JSON.parse(JSON.stringify(app.globalData.userInfo.settings))
         this.settings = settings
+        let wx_user = app.globalData.userInfo.wx_user
         let switchSettings = {}
         let picker = {}
         let customTypeValue = {}
+        if (wx_user) {
+            switchSettings.auto_update_avatar = (settings.auto_update_avatar === undefined) ? true : settings.auto_update_avatar
+            switchSettings.auto_update_username = (settings.auto_update_username === undefined) ? true : settings.auto_update_username
+        }
+
         switchSettings.timing = (settings.timing === undefined) ? true : settings.timing
         switchSettings.autoplay = (settings.autoplay === undefined) ? true : settings.autoplay
         switchSettings.daily_task = (settings.daily_task === undefined) ? false : settings.daily_task
@@ -87,13 +93,14 @@ Page({
         customTypeValue.daily_review = (picker.daily_review != 10) ? taskLoadRange[picker.daily_review] : settings.daily_review
 
         this.setData({
+            wx_user,
             switchSettings,
             picker,
             customTypeValue,
         })
     },
 
-    switchChange(e) {
+    async switchChange(e) {
         // console.log(e)
         let value = e.detail.value
         let type = e.currentTarget.dataset.type
@@ -123,6 +130,30 @@ Page({
                     if (!this.settings.daily_learn) this.settings.daily_learn = 1
                     if (!this.settings.daily_review) this.settings.daily_review = 1
                 }
+                this.isChange = true
+            }
+        } else if (type == 'auto_update_avatar') {
+            this.setData({
+                'switchSettings.auto_update_avatar': value,
+            })
+            if (this.settings.auto_update_avatar != value) {
+                this.settings.auto_update_avatar = value
+                this.isChange = true
+            }
+            if (value == false) {
+                let prefix = app.globalData.userInfo.avatar_pic.substring(0, 6)
+                // console.log('avatar_pic', app.globalData.userInfo.avatar_pic)
+                console.log(prefix)
+                if (prefix != 'cloud:') {
+                    this.uploadAndModify(app.globalData.userInfo.avatar_pic)
+                }
+            }
+        } else if (type == 'auto_update_username') {
+            this.setData({
+                'switchSettings.auto_update_username': value,
+            })
+            if (this.settings.auto_update_username != value) {
+                this.settings.auto_update_username = value
                 this.isChange = true
             }
         }
@@ -260,6 +291,29 @@ Page({
     getControl() {
         console.log('settings', this.settings)
         console.log('customObj', this.customObj)
+    },
+
+    async uploadAndModify(imgSrc) {
+        let res = await userApi.downloadFile(imgSrc)
+        let tempFilePath = res.tempFilePath
+        console.log('downloadFile', res)
+
+        let res1 = await userApi.uploadFile(tempFilePath)
+        let file = res1.fileID
+        console.log('file', file)
+        console.log('uploadFile', res1)
+
+        let res2 = await userApi.changeUserInfo({
+            user_id: app.globalData.userInfo.user_id,
+            type: 'avatar_pic',
+            value: file
+        })
+        console.log('changeUserInfo', res2)
+        if (res2.data == true) {
+            app.globalData.userInfo.avatar_pic = file
+            app.globalData.forChangeAvatar.change = true
+            app.globalData.forChangeAvatar.imgSrc = file
+        }
     },
 
     /**

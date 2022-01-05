@@ -48,6 +48,11 @@ App({
         },
         updatedForIndex: false,
         updatedForOverview: false,
+        forChangeAvatar: {
+            change: false,
+            tempImgSrc: '',
+            imgSrc: '',
+        }
     },
 
     checkLogin: async function () {

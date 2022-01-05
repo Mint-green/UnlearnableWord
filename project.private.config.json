@@ -65,6 +65,12 @@
                     "pathName": "pages/user_settings/user_settings",
                     "query": "",
                     "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/image_cropper/image_cropper",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }

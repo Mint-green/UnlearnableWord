@@ -720,7 +720,11 @@ Page({
             return
         }
 
+        console.log('res.data', res.data)
         let reviewData = JSON.parse(JSON.stringify(res.data))
+        reviewData.sort(function (a, b) {
+            return a.NOI - b.NOI
+        })
         let temp = 0
         for (let i = 0; i < reviewData.length; i++) {
             for (let j = 0; j < this.wordDetailList.length; j++) {

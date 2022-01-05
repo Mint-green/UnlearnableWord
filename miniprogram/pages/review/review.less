@@ -371,10 +371,21 @@
         border-radius: 2rpx;
     }
 
+    .title {
+        font-size: 28rpx;
+        height: 40rpx;
+        margin-top: 20rpx;
+        width: 670rpx;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: 600;
+    }
+
     .reviewResWrapper {
         width: 750rpx;
         min-height: 460rpx; // 5*80+60
-        max-height: 660rpx; // 7*80+60+40
+        max-height: 620rpx; // 7*80+60
         padding-bottom: 10rpx;
 
         .item {
@@ -383,20 +394,6 @@
             align-items: center;
             justify-content: space-between;
             font-weight: 600;
-
-            .word {
-                margin-left: 40rpx;
-            }
-
-            .interval {
-                margin-right: 40rpx;
-            }
-        }
-
-        .title {
-            font-size: 28rpx;
-            height: 40rpx;
-            margin-top: 20rpx;
         }
 
         .words {
@@ -405,10 +402,12 @@
 
             .word {
                 color: #757575;
+                margin-left: 40rpx;
             }
 
             .interval {
                 color: #8a8a8a;
+                margin-right: 40rpx;
             }
 
             .mastered {

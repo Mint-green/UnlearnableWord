@@ -302,10 +302,20 @@
   height: 4rpx;
   border-radius: 2rpx;
 }
+.doneWrapper .title {
+  font-size: 28rpx;
+  height: 40rpx;
+  margin-top: 20rpx;
+  width: 670rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+}
 .doneWrapper .reviewResWrapper {
   width: 750rpx;
   min-height: 460rpx;
-  max-height: 660rpx;
+  max-height: 620rpx;
   padding-bottom: 10rpx;
 }
 .doneWrapper .reviewResWrapper .item {
@@ -315,26 +325,17 @@
   justify-content: space-between;
   font-weight: 600;
 }
-.doneWrapper .reviewResWrapper .item .word {
-  margin-left: 40rpx;
-}
-.doneWrapper .reviewResWrapper .item .interval {
-  margin-right: 40rpx;
-}
-.doneWrapper .reviewResWrapper .title {
-  font-size: 28rpx;
-  height: 40rpx;
-  margin-top: 20rpx;
-}
 .doneWrapper .reviewResWrapper .words {
   font-size: 32rpx;
   height: 80rpx;
 }
 .doneWrapper .reviewResWrapper .words .word {
   color: #757575;
+  margin-left: 40rpx;
 }
 .doneWrapper .reviewResWrapper .words .interval {
   color: #8a8a8a;
+  margin-right: 40rpx;
 }
 .doneWrapper .reviewResWrapper .words .mastered {
   margin-right: 40rpx;
