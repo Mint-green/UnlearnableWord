@@ -77,6 +77,15 @@
 <img src="images/title_4.png"  width="100%" alt="图名4">
 
 
+
+### 体验
+
+想要玩一下的可以扫描以下二维码:
+
+<img src="images/miniprogram_QRcode.jpg" width="20%" alt="小程序二维码">
+
+
+
 ### 更多
 
 最近比较忙，先简单列列已完成的and放放效果图（请原谅我放那么多图），详细的介绍之后再上，持续更新ing~
