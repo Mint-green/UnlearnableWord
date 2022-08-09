@@ -65,7 +65,10 @@ Page({
     },
 
     async uploadAndModify(obj) {
-        wx.showLoading()
+        wx.showLoading({
+            title: '头像上传中...',
+            mask: true,
+        })
         let res1 = await userApi.uploadFile(obj.url)
         let file = res1.fileID
         if (!file) {
