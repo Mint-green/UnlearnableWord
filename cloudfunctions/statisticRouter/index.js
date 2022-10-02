@@ -4,7 +4,7 @@ const TcbRouter = require('tcb-router') // 导入小程序路由
 
 const rescontent = require('utils/response_content.js')
 
-cloud.init({ env: 'music-cloud-1v7x1' })
+cloud.init({ env: 'music-cloud-1v7x1' })  // 此处请切换为你自己的小程序云环境 id
 const db = cloud.database({ throwOnNotFound: false })
 const _ = db.command
 const $ = db.command.aggregate
@@ -15,6 +15,11 @@ exports.main = async (event, context) => {
     // const wxContext = cloud.getWXContext()
     const app = new TcbRouter({ event })
     console.log(event.$url)
+
+    app.use(async (ctx, next) => {
+        console.log('router name:', event.$url)
+        await next() // 执行下一中间件
+    });
 
     app.router('getWBLearnData', async (ctx, next) => {
         let user_id = event.user_id

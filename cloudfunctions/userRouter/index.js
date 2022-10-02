@@ -5,7 +5,7 @@ const rescontent = require('utils/response_content.js')
 const InitOFMatrix = require('utils/init_of_matrix.js')
 const DefaultAvatarList = require('utils/default_avatar_pic.js')
 
-cloud.init({ env: 'music-cloud-1v7x1' })
+cloud.init({ env: 'music-cloud-1v7x1' })  // 此处请切换为你自己的小程序云环境 id
 const db = cloud.database({ throwOnNotFound: false })
 const learnerDB = db.collection('learner')
 

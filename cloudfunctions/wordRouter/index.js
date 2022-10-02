@@ -8,7 +8,7 @@ const sm_5_js = require('utils/sm-5.js')
 const get_all_sort_list = require('utils/get_all_sort_list.js')
 const bent = require('bent')
 
-cloud.init({ env: 'music-cloud-1v7x1' })
+cloud.init({ env: 'music-cloud-1v7x1' })  // 此处请切换为你自己的小程序云环境 id
 const db = cloud.database({ throwOnNotFound: false })
 const _ = db.command
 const $ = db.command.aggregate
@@ -20,6 +20,11 @@ exports.main = async (event, context) => {
     // const wxContext = cloud.getWXContext()
     const app = new TcbRouter({ event })
     console.log(event.$url)
+
+    app.use(async (ctx, next) => {
+        console.log('router name:', event.$url)
+        await next() // 执行下一中间件
+    });
 
     app.router('getDailySentence', async (ctx, next) => {
         let time = new Date().getTime()
