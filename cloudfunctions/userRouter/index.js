@@ -14,10 +14,10 @@ exports.main = async (event, context) => {
     // console.log('context:', context)
 
     // app.use 表示该中间件会适用于所有的路由
-    // app.use(async (ctx, next) => {
-    //     ctx.data = {};
-    //     await next(); // 执行下一中间件
-    // });
+    app.use(async (ctx, next) => {
+        console.log('router name:', event.$url)
+        await next() // 执行下一中间件
+    });
 
     app.router('checkUsername', async (ctx, next) => {
         let username = event.username
@@ -80,13 +80,6 @@ exports.main = async (event, context) => {
                 return
             }
             console.log('Create successfully, done.', new Date().getTime())
-            // let record = await learnerDB.doc(record_id).field({ // 获取新用户的基本数据(user_id、词书、设置等)
-            //     _id: false,
-            //     c_time: false,
-            //     open_id: false,
-            //     pwd: false,
-            // }).get()
-            // console.log('Create Done return user info', new Date().getTime())
             let returnInfo = {
                 username: userinfo.username,
                 last_login: userinfo.last_login,
