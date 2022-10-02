@@ -56,8 +56,14 @@ exports.main = async (event, context) => {
 
         try {
             let res1 = await learnerDB.orderBy('user_id', 'desc').limit(1).get()    // 获得当前最大的user_id
-            console.log('Get last user_id, which is', res1.data[0].user_id, 'then creating account', new Date().getTime())
-            userinfo.user_id = res1.data[0].user_id + 1
+            if (res1.data.length == 0) {
+                console.log('there\'s no other user, this is the first user his/her id will be 0')
+                userinfo.user_id = 0
+            } else {
+                console.log('Get last user_id, which is', res1.data[0].user_id, 'then creating account', new Date().getTime())
+                userinfo.user_id = res1.data[0].user_id + 1
+            }
+
             let res2 = await learnerDB.add({ data: userinfo })  // 向数据库添加新用户记录
             if (!res2._id) {
                 ctx.body = { ...rescontent.DBERR }
@@ -152,8 +158,14 @@ exports.main = async (event, context) => {
                 userinfo.of_matrix = InitOFMatrix
 
                 let res2 = await learnerDB.orderBy('user_id', 'desc').limit(1).get()
-                userinfo.user_id = res2.data[0].user_id + 1
-                
+                if (res2.data.length == 0) {
+                    console.log('there\'s no other user, this is the first user his/her id will be 0')
+                    userinfo.user_id = 0
+                } else {
+                    console.log('Get last user_id, which is', res2.data[0].user_id, 'then creating account', new Date().getTime())
+                    userinfo.user_id = res2.data[0].user_id + 1
+                }
+
                 let res3 = await learnerDB.add({ data: userinfo })
                 if (!res3._id) {
                     ctx.body = { ...rescontent.DBERR }
