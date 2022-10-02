@@ -24,8 +24,6 @@
   <button class="submit" type="primary" bindtap="register" hover-class="wasTaped">确定</button>
 </view>
 
-<!-- <view class="avatarPicTest"><image class="pic" src="cloud://music-cloud-1v7x1.6d75-music-cloud-1v7x1-1302160851/avatar_pic/default_3.jpg" mode='aspectFit'></image></view> -->
-
 <view class="wxLoginWrapper">
   <view class="loginBtn" hover-class="wasTaped" bindtap='wxLogin'>
     <image class="logo" src='../../static/images/logo.png' mode='aspectFit'></image>

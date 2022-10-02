@@ -3,6 +3,7 @@ const cloud = require('wx-server-sdk')
 const TcbRouter = require('tcb-router') // 导入小程序路由
 const rescontent = require('utils/response_content.js')
 const InitOFMatrix = require('utils/init_of_matrix.js')
+const DefaultAvatarList = require('utils/default_avatar_pic.js')
 
 cloud.init({ env: 'music-cloud-1v7x1' })
 const db = cloud.database({ throwOnNotFound: false })
@@ -50,8 +51,8 @@ exports.main = async (event, context) => {
         userinfo.settings = {}
         userinfo.open_id = ''
         userinfo.wx_user = false
-        random_num = Math.floor(Math.random() * 3) + 1
-        userinfo.avatar_pic = 'cloud://music-cloud-1v7x1.6d75-music-cloud-1v7x1-1302160851/avatar_pic/default_' + random_num + '.jpg'
+        random_num = Math.floor(Math.random() * DefaultAvatarList.length)
+        userinfo.avatar_pic = DefaultAvatarList[random_num] || DefaultAvatarList[0]
         userinfo.of_matrix = InitOFMatrix
 
         try {

@@ -27,7 +27,7 @@ Page({
     data: {
         isLogin: false,
         userInfo: {},
-        defaultPic: 'cloud://music-cloud-1v7x1.6d75-music-cloud-1v7x1-1302160851/avatar_pic/default_1.jpg',
+        defaultPic: 'https://pic2.zhimg.com/50/v2-b1e4eb7f72908a04306958f13ce45d94_hd.jpg?source=1940ef5c',
         changeType: -1,
         inputValue: {},
         errMsg: '',
