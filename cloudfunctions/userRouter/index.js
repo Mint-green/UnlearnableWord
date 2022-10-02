@@ -2,6 +2,7 @@
 const cloud = require('wx-server-sdk')
 const TcbRouter = require('tcb-router') // 导入小程序路由
 const rescontent = require('utils/response_content.js')
+const InitOFMatrix = require('utils/init_of_matrix.js')
 
 cloud.init({ env: 'music-cloud-1v7x1' })
 const db = cloud.database({ throwOnNotFound: false })
@@ -51,24 +52,7 @@ exports.main = async (event, context) => {
         userinfo.wx_user = false
         random_num = Math.floor(Math.random() * 3) + 1
         userinfo.avatar_pic = 'cloud://music-cloud-1v7x1.6d75-music-cloud-1v7x1-1302160851/avatar_pic/default_' + random_num + '.jpg'
-        userinfo.of_matrix = {
-            '1.3': [5],
-            '1.4': [5],
-            '1.5': [5],
-            '1.6': [5],
-            '1.7': [5],
-            '1.8': [5],
-            '1.9': [5],
-            '2.0': [5],
-            '2.1': [5],
-            '2.2': [5],
-            '2.3': [5],
-            '2.4': [5],
-            '2.5': [5],
-            '2.6': [5],
-            '2.7': [5],
-            '2.8': [5],
-        }
+        userinfo.of_matrix = InitOFMatrix
 
         try {
             let res1 = await learnerDB.orderBy('user_id', 'desc').limit(1).get()    // 获得当前最大的user_id
@@ -165,26 +149,11 @@ exports.main = async (event, context) => {
                 userinfo.open_id = open_id
                 userinfo.wx_user = true
                 userinfo.avatar_pic = event.avatar_pic
-                userinfo.of_matrix = {
-                    '1.3': [5],
-                    '1.4': [5],
-                    '1.5': [5],
-                    '1.6': [5],
-                    '1.7': [5],
-                    '1.8': [5],
-                    '1.9': [5],
-                    '2.0': [5],
-                    '2.1': [5],
-                    '2.2': [5],
-                    '2.3': [5],
-                    '2.4': [5],
-                    '2.5': [5],
-                    '2.6': [5],
-                    '2.7': [5],
-                    '2.8': [5],
-                }
+                userinfo.of_matrix = InitOFMatrix
+
                 let res2 = await learnerDB.orderBy('user_id', 'desc').limit(1).get()
                 userinfo.user_id = res2.data[0].user_id + 1
+                
                 let res3 = await learnerDB.add({ data: userinfo })
                 if (!res3._id) {
                     ctx.body = { ...rescontent.DBERR }
